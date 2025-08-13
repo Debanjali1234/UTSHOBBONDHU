@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>যাত্রী সংখ্যা ও মূল্য</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-pink-100 via-rose-100 to-pink-200 min-h-screen p-6 font-sans">
+
+  <!-- Main Card -->
+  <div class="max-w-xl mx-auto bg-white shadow-2xl rounded-2xl p-8 space-y-6 border border-rose-200">
+    <h1 class="text-center text-3xl font-extrabold text-pink-600 drop-shadow-md">যাত্রী সংখ্যা ও মূল্য</h1>
+
+    <!-- Passenger Input Section -->
+    <div class="space-y-5">
+      <div class="flex justify-between items-center border-b pb-3 border-rose-300">
+        <span class="text-pink-800 font-medium">👶 1 - 12 বছর (₹৫০)</span>
+        <input type="number" id="child" class="w-20 border-2 border-pink-300 rounded-lg text-center shadow-sm focus:ring-2 focus:ring-pink-400" value="0" min="0">
+      </div>
+      <div class="flex justify-between items-center border-b pb-3 border-rose-300">
+        <span class="text-pink-800 font-medium">🧑 12 - 60 বছর (₹৫০)</span>
+        <input type="number" id="adult" class="w-20 border-2 border-pink-300 rounded-lg text-center shadow-sm focus:ring-2 focus:ring-pink-400" value="0" min="0">
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="text-pink-800 font-medium">👵 60+ বছর (₹৭৫)</span>
+        <input type="number" id="senior" class="w-20 border-2 border-pink-300 rounded-lg text-center shadow-sm focus:ring-2 focus:ring-pink-400" value="0" min="0">
+      </div>
+    </div>
+
+    <!-- Total Display -->
+    <div class="bg-green-200 text-center text-xl font-semibold py-4 rounded-lg shadow-inner border border-green-400 transition-all duration-200 ease-in-out" id="total">মোট মূল্য: ₹০</div>
+
+    <!-- Buttons -->
+    <div class="flex justify-center gap-4 pt-2">
+      <button onclick="makePayment()" class="bg-green-600 hover:bg-green-700 transition duration-300 text-white px-6 py-2 rounded-full font-semibold shadow-md">💳 পেমেন্ট করুন</button>
+      <button onclick="resetForm()" class="bg-gray-600 hover:bg-gray-700 transition duration-300 text-white px-6 py-2 rounded-full font-semibold shadow-md">♻️ রিসেট করুন</button>
+    </div>
+  </div>
+
+  <!-- Rules Section -->
+  <div class="max-w-xl mx-auto bg-white shadow-md rounded-2xl mt-8 p-6 border border-rose-200">
+    <h2 class="text-xl font-bold text-pink-700 mb-3 border-b-2 border-pink-300 pb-2">📌 পাস ব্যবহারের নিয়মাবলী</h2>
+    <ul class="list-disc list-inside space-y-2 text-gray-700 leading-relaxed">
+      <li>একজন ব্যক্তির জন্য একটি পাস বৈধ।</li>
+      <li>অগ্রিম পেমেন্ট ফেরতযোগ্য নয়।</li>
+      <li>পাস শুধুমাত্র নির্ধারিত দিনের জন্য কার্যকর।</li>
+    </ul>
+  </div>
+
+  <!-- Script Section -->
+  <script>
+    const childInput = document.getElementById('child');
+    const adultInput = document.getElementById('adult');
+    const seniorInput = document.getElementById('senior');
+    const totalDisplay = document.getElementById('total');
+
+    function updateTotal() {
+      const child = parseInt(childInput.value) || 0;
+      const adult = parseInt(adultInput.value) || 0;
+      const senior = parseInt(seniorInput.value) || 0;
+
+      const total = (child * 50) + (adult * 50) + (senior * 75);
+      totalDisplay.textContent = `মোট মূল্য: ₹${total}`;
+    }
+
+    function resetForm() {
+      childInput.value = 0;
+      adultInput.value = 0;
+      seniorInput.value = 0;
+      updateTotal();
+    }
+
+    function makePayment() {
+      alert("পেমেন্ট সিস্টেম এখন সক্রিয় নয়।");
+    }
+
+    // Attach event listeners
+    childInput.addEventListener('input', updateTotal);
+    adultInput.addEventListener('input', updateTotal);
+    seniorInput.addEventListener('input', updateTotal);
+
+    // Initialize total on load
+    updateTotal();
+  </script>
+
+</body>
+</html>

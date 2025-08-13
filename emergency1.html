@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>স্বেচ্ছাসেবক হোন</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans Bengali', sans-serif;
+            background: linear-gradient(135deg, #f3e7ff, #e4f1ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .volunteer-form {
+            max-width: 650px;
+            width: 100%;
+            background-color: #fff;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            animation: popUp 0.6s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes popUp {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .volunteer-form::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(142,68,173,0.1) 0%, transparent 70%);
+            animation: rotateBG 10s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes rotateBG {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .form-heading {
+            text-align: center;
+            color: #8e44ad;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .form-heading .icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        .form-description {
+            text-align: center;
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            z-index: 1;
+            position: relative;
+        }
+
+        .form-section-title {
+            color: #8e44ad;
+            font-size: 1.3rem;
+            border-left: 5px solid #8e44ad;
+            padding-left: 10px;
+            margin-bottom: 20px;
+            margin-top: 30px;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: #444;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            font-family: 'Noto Sans Bengali', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #8e44ad;
+            box-shadow: 0 0 8px rgba(142, 68, 173, 0.4);
+            outline: none;
+        }
+        
+        .form-group input[type="file"] {
+            padding: 8px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            font-weight: 400;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        
+        .consent-group {
+            margin-top: 30px;
+        }
+
+        .consent-group label {
+            display: flex;
+            align-items: center;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+        
+        .consent-group input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(90deg, #8e44ad, #6c3483);
+            color: #fff;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+            margin-top: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(90deg, #6c3483, #8e44ad);
+            transform: scale(1.03);
+        }
+
+        /* Extra points section */
+        .extra-points {
+            background: #f9f1ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #8e44ad;
+            position: relative;
+            z-index: 1;
+        }
+        .extra-points ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+        .extra-points li {
+            margin-bottom: 5px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <form class="volunteer-form" id="volunteerForm">
+        <h2 class="form-heading"><span class="icon">👥</span>স্বেচ্ছাসেবক হোন</h2>
+        <p class="form-description">পূজার দিনগুলিতে আমাদের সাহায্য করার জন্য স্বেচ্ছাসেবক হিসাবে যোগ দিন।</p>
+
+        <div class="extra-points">
+            <strong>স্বেচ্ছাসেবকের সুবিধা:</strong>
+            <ul>
+                <li>সম্প্রদায়ের সেবা করার সুযোগ</li>
+                <li>নতুন মানুষের সাথে পরিচিতি</li>
+                <li>অভিজ্ঞতা ও দক্ষতা বৃদ্ধি</li>
+            </ul>
+        </div>
+
+        <div class="form-section-title">ব্যক্তিগত বিবরণ</div>
+        <div class="form-group">
+            <label for="fullName">পূর্ণ নাম</label>
+            <input type="text" id="fullName" placeholder="আপনার পূর্ণ নাম লিখুন" required>
+        </div>
+        <div class="form-group">
+            <label for="mobileNumber">মোবাইল নম্বর</label>
+            <input type="tel" id="mobileNumber" placeholder="আপনার মোবাইল নম্বর লিখুন" required>
+        </div>
+        <div class="form-group">
+            <label for="email">ইমেল ঠিকানা</label>
+            <input type="email" id="email" placeholder="আপনার ইমেল ঠিকানা লিখুন" required>
+        </div>
+
+        <div class="form-section-title">উপস্থিতি ও দক্ষতা</div>
+        <div class="form-group">
+            <label>আপনার উপস্থিতির দিনগুলি নির্বাচন করুন</label>
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" name="availability" value="day1"> পূজার প্রথম দিন
+                </label>
+                <label>
+                    <input type="checkbox" name="availability" value="day2"> পূজার দ্বিতীয় দিন
+                </label>
+                <label>
+                    <input type="checkbox" name="availability" value="day3"> পূজার তৃতীয় দিন
+                </label>
+                <label>
+                    <input type="checkbox" name="availability" value="day4"> পূজার চতুর্থ দিন
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="previousExperience">পূর্ববর্তী অভিজ্ঞতা (যদি থাকে)</label>
+            <textarea id="previousExperience" rows="3" placeholder="আপনার পূর্ববর্তী স্বেচ্ছাসেবক অভিজ্ঞতা সম্পর্কে লিখুন।"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="skills">দক্ষতা (ঐচ্ছিক)</label>
+            <select id="skills">
+                <option value="">আপনার দক্ষতা নির্বাচন করুন</option>
+                <option value="medical">ডাক্তারি জ্ঞান</option>
+                <option value="crowd_management">জনগণ নিয়ন্ত্রণ</option>
+                <option value="technical">প্রযুক্তিগত সহায়তা</option>
+                <option value="other">অন্যান্য</option>
+            </select>
+        </div>
+
+        <div class="form-section-title">রেজুমে আপলোড করুন (ঐচ্ছিক)</div>
+        <div class="form-group">
+            <label for="resume">আপনার সিভি/রেজুমে আপলোড করুন</label>
+            <input type="file" id="resume" accept=".pdf,.doc,.docx">
+        </div>
+
+        <div class="form-group consent-group">
+            <label for="declaration">
+                <input type="checkbox" id="declaration" required>
+                আমি নিশ্চিত করছি যে আমি স্বেচ্ছায় এই কাজে যোগ দিতে ইচ্ছুক এবং আমি যে তথ্য দিয়েছি তা সঠিক।
+            </label>
+        </div>
+
+        <button type="submit" class="submit-btn">আবেদন জমা দিন</button>
+    </form>
+
+    <script>
+        document.getElementById('volunteerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value;
+            const mobileNumber = document.getElementById('mobileNumber').value;
+            const email = document.getElementById('email').value;
+            const previousExperience = document.getElementById('previousExperience').value;
+            const skills = document.getElementById('skills').value;
+            const resumeFile = document.getElementById('resume').files[0];
+            const declaration = document.getElementById('declaration').checked;
+
+            const availabilityCheckboxes = document.querySelectorAll('input[name="availability"]:checked');
+            const availability = Array.from(availabilityCheckboxes).map(cb => cb.value);
+
+            if (!declaration) {
+                alert("অনুগ্রহ করে নিশ্চিত করুন যে আপনি স্বেচ্ছাসেবক হিসেবে যোগ দিতে ইচ্ছুক।");
+                return;
+            }
+            
+            let confirmationMessage = "✅ আপনার স্বেচ্ছাসেবক আবেদন সফলভাবে জমা হয়েছে!\n\n📌 প্রদত্ত তথ্য:\nনাম: " + fullName + "\nমোবাইল: " + mobileNumber + "\nইমেল: " + email + "\nউপস্থিতি: " + availability.join(', ') + "\nপূর্ববর্তী অভিজ্ঞতা: " + (previousExperience || 'নেই') + "\nদক্ষতা: " + (skills || 'উল্লেখ নেই');
+
+            if (resumeFile) {
+                confirmationMessage += "\n📄 ফাইল আপলোড করা হয়েছে: " + resumeFile.name;
+            }
+
+            alert(confirmationMessage);
+        });
+    </script>
+
+</body>
+</html>
