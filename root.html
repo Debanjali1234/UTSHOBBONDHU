@@ -1,115 +1,108 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>রুট নির্দেশিকা</title>
-    
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="http://googleusercontent.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
-    
-    <style>
-        body {
-            background-color: #f8f0f5;
-            font-family: 'Noto Sans Bengali', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem;
-            margin: 0;
-        }
-
-        .route-card, .map-container {
-            background-color: #fff;
-            border-radius: 1rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 450px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-            box-sizing: border-box;
-        }
-
-        .route-title {
-            color: #b22d76;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .route-description {
-            color: #333;
-            font-size: 1rem;
-            line-height: 1.5;
-            margin-bottom: 1.5rem;
-        }
-
-        .route-button {
-            display: inline-block;
-            background-color: #b22d76;
-            color: #fff;
-            font-size: 1rem;
-            font-weight: 700;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-
-        .route-button:hover {
-            background-color: #8c235b;
-        }
-
-        .map-title {
-            color: #b22d76;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .map-iframe {
-            width: 100%;
-            height: 300px;
-            border: none;
-            border-radius: 0.75rem;
-        }
-
-        /* Mobile optimization */
-        @media (max-width: 500px) {
-            body {
-                padding: 1rem;
-            }
-            .route-title {
-                font-size: 1.3rem;
-            }
-            .route-button {
-                font-size: 0.9rem;
-                padding: 0.6rem 1.2rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Metro Route • Kolkata</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="root.css"/>
 </head>
 <body>
+  <header class="site-header">
+    <div class="brand">
+      <div class="logo-dot"></div>
+      <h1 data-i18n="title">মেট্রো রুট নির্দেশিকা</h1>
+    </div>
 
-    <div class="route-card">
-        <h2 class="route-title">রুট নির্দেশিকা</h2>
-        <p class="route-description">আপনার গন্তব্যে পৌঁছাতে কোন মেট্রো নেবেন? সহজ রুট জেনে নিন।</p>
-        <a href="https://www.google.com/search?q=https://www.google.com/maps/embed%3Fpb%3D!1m18!1m12!1m3!1d3153.251945535315!2d144.96317281531696!3d-37.8162791797519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%253A0xf577b21e1e9f160!2sMelbourne%2520VIC%252C%2520Australia!5e0!3m2!1sen!2sin!4v1678234567890!5m2!1sen!2sin8" target="_blank" class="route-button">
-            রুট প্ল্যান দেখুন
-        </a>
-    </div>
+    <!-- Language Switcher -->
+    <div class="lang-switch" role="tablist" aria-label="Language">
+      <button class="lang-btn" data-lang="en" aria-selected="false">English</button>
+      <button class="lang-btn" data-lang="hi" aria-selected="false">हिन्दी</button>
+      <button class="lang-btn active" data-lang="bn" aria-selected="true">বাংলা</button>
+      <span class="pill"></span>
+    </div>
+  </header>
 
-    <div class="map-container">
-        <h3 class="map-title">আপনার রুট এখানে দেখা যাবে</h3>
-        <iframe
-            src="https://www.google.com/maps/embed/v1/1"
-            class="map-iframe"
-            allowfullscreen
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-    </div>
+  <main class="container">
+    <!-- Route Finder -->
+    <section class="card route-card">
+      <h2 class="card-title" data-i18n="routeFinder">রুট খুঁজুন</h2>
+      <p class="card-sub" data-i18n="routeFinderNote">আপনার বর্তমান স্টেশন ও গন্তব্য স্টেশন বাছুন।</p>
 
+      <form id="routeForm" class="route-form" autocomplete="off">
+        <div class="field">
+          <label for="fromStation" data-i18n="from">বর্তমান স্টেশন</label>
+          <select id="fromStation" required></select>
+        </div>
+        <div class="field">
+          <label for="toStation" data-i18n="to">গন্তব্য স্টেশন</label>
+          <select id="toStation" required></select>
+        </div>
+
+        <button type="submit" class="btn primary" id="findBtn" data-i18n="findRoute">রুট দেখুন</button>
+      </form>
+
+      <!-- Answer label -->
+      <div id="answerLabel" class="answer-label" aria-live="polite"></div>
+
+      <!-- Visualization -->
+      <div id="viz" class="viz" aria-label="Route visualization"></div>
+
+      <!-- Distance + Summary -->
+      <div id="summary" class="summary"></div>
+    </section>
+
+    <!-- Timetables -->
+    <section class="card timetable-card">
+      <div class="tabs">
+        <button class="tab active" data-line="blue" aria-selected="true" data-i18n="blueLine">নীল লাইন (Blue)</button>
+        <button class="tab" data-line="green" aria-selected="false" data-i18n="greenLine">সবুজ লাইন (Green)</button>
+      </div>
+
+      <div class="table-meta" data-i18n="timetableNote">* সময়সূচি/তালিকা নমুনা — পরে পূর্ণ ডেটা যুক্ত হবে।</div>
+
+      <div class="table-wrap">
+        <table id="timetable" class="metro-table" aria-describedby="timetable">
+          <thead>
+            <tr>
+              <th data-i18n="thNo">#</th>
+              <th data-i18n="thStation">স্টেশন</th>
+              <th data-i18n="thOpening">উদ্বোধন</th>
+              <th data-i18n="thConn">সংযোগ</th>
+              <th data-i18n="thLayout">লেআউট</th>
+              <th data-i18n="thPlat">প্ল্যাটফর্ম</th>
+            </tr>
+          </thead>
+          <tbody id="timetableBody"></tbody>
+        </table>
+      </div>
+      <p class="coming-soon" data-i18n="moreLines">অন্যান্য লাইন শীঘ্রই যুক্ত হবে।</p>
+    </section>
+
+    <!-- Google Maps (live directions) -->
+    <section class="card map-card">
+      <h2 class="card-title" data-i18n="mapTitle">গুগল ম্যাপে ট্রানজিট রুট</h2>
+      <p class="card-sub" data-i18n="mapNote">নীচের ম্যাপে নির্বাচিত স্টেশনগুলোর ট্রানজিট রুট দেখা যাবে।</p>
+
+      <div class="map-actions">
+        <a id="openMaps" class="btn ghost" target="_blank" rel="noopener" data-i18n="openInMaps">Google Maps-এ খুলুন</a>
+      </div>
+
+      <div class="map-frame">
+        <iframe id="gmap"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+          title="Kolkata Metro route map">
+        </iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small data-i18n="footNote">দূরত্ব আনুমানিক (স্টেশন-টু-স্টেশন)। লাইভ সময়সূচি ও ট্রাফিকের জন্য Google Maps/Metro কর্তৃপক্ষের তথ্য দেখুন।</small>
+  </footer>
+
+  <script src="root.js"></script>
 </body>
 </html>
