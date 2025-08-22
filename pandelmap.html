@@ -3,152 +3,1134 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>এখনই দেখুন</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>এখনই দেখুন - পুজো প্যান্ডেল ম্যাপ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
-    body {
-      background: linear-gradient(to right, #fdf2f8, #fce7f3);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
+
+    :root {
+      --pineapple: #74685E;
+      --apricot: #E47A24;
+      --blood-orange: #BF2020;
+      --candy-apple: #951421;
+      --white: #ffffff;
+      --light-gray: #f8f9fa;
+      --text-dark: #2c3e50;
+      --shadow: rgba(0, 0, 0, 0.1);
+      --shadow-hover: rgba(0, 0, 0, 0.15);
+    }
+
+    body {
+      font-family: 'Noto Sans Bengali', sans-serif;
+      background: linear-gradient(135deg, var(--light-gray) 0%, #e8ecf0 100%);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Floating particles background */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      background: var(--apricot);
+      border-radius: 50%;
+      opacity: 0.1;
+      animation: float 8s infinite linear;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); }
+      100% { transform: translateY(-100px) rotate(360deg); }
+    }
+
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, var(--pineapple) 0%, var(--apricot) 100%);
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="0%" r="50%"><stop offset="0%" stop-color="white" stop-opacity="0.1"/><stop offset="100%" stop-color="white" stop-opacity="0"/></radialGradient></defs><ellipse cx="50" cy="0" rx="50" ry="20" fill="url(%23a)"/></svg>') center/cover;
+      animation: headerPulse 4s ease-in-out infinite;
+    }
+
+    @keyframes headerPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
+    }
+
+    header h1 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--white);
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 1;
+      animation: slideInDown 1s ease-out;
+      letter-spacing: 1px;
+    }
+
+    @keyframes slideInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+     /* Language Switcher Styles */
+    .language-switcher {
+      display: flex;
+      gap: 5px;
+      background: linear-gradient(135deg, #5d2e1a, #8b3a1e);
+      backdrop-filter: blur(10px);
+      padding: 8px;
+      border-radius: 25px;
+      box-shadow: 0 8px 25px rgba(93, 46, 26, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .lang-btn {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      font-family: 'Noto Sans Bengali', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      background: transparent;
+      color: rgba(255, 255, 255, 0.9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lang-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+      transition: left 0.5s;
+    }
+
+    .lang-btn:hover::before {
+      left: 100%;
+    }
+
+    .lang-btn:hover {
+      transform: translateY(-2px);
+      color: var(--white);
+      background: rgba(139, 58, 30, 0.3);
+      box-shadow: 0 5px 15px rgba(93, 46, 26, 0.3);
+    }
+
+    .lang-btn.active {
+      background: linear-gradient(135deg, var(--apricot), var(--blood-orange));
+      color: var(--white);
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(228, 122, 36, 0.4);
+    }
+
+    .lang-btn.active:hover {
+      background: linear-gradient(135deg, var(--blood-orange), var(--candy-apple));
+      transform: scale(1.05) translateY(-2px);
+      box-shadow: 0 8px 20px rgba(228, 122, 36, 0.5);
+    }
+
+    /* Main Container */
+    main {
+      padding: 40px 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* Search Section */
+    .search-section {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 35px;
+      margin-bottom: 40px;
+      box-shadow: 0 10px 30px var(--shadow);
+      border: 1px solid rgba(228, 122, 36, 0.1);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .search-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(228, 122, 36, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .search-section:hover::before {
+      left: 100%;
+    }
+
+    .search-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--pineapple);
+      margin-bottom: 20px;
+    }
+
+    .search-label i {
+      color: var(--apricot);
+      font-size: 1.5rem;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 15px 20px;
+      border: 2px solid rgba(228, 122, 36, 0.2);
+      border-radius: 15px;
+      font-size: 1.1rem;
+      font-family: 'Noto Sans Bengali', sans-serif;
+      transition: all 0.3s ease;
+      background: var(--light-gray);
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--apricot);
+      box-shadow: 0 0 20px rgba(228, 122, 36, 0.2);
+      background: var(--white);
+    }
+
+    .search-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--apricot), var(--blood-orange));
+      color: var(--white);
+      padding: 15px 30px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(228, 122, 36, 0.3);
+      font-family: 'Noto Sans Bengali', sans-serif;
+    }
+
+    .search-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(228, 122, 36, 0.4);
+      background: linear-gradient(135deg, var(--blood-orange), var(--candy-apple));
+    }
+
+    /* Stats Counter */
+    .stats-bar {
+      background: linear-gradient(135deg, var(--pineapple), var(--apricot));
+      color: var(--white);
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      text-align: center;
+      font-weight: 600;
+      box-shadow: 0 8px 25px rgba(116, 104, 94, 0.3);
+    }
+
+    .stats-counter {
+      font-size: 1.5rem;
+      margin: 0 10px;
+    }
+
+    /* Quick Navigation Section */
+    .quick-nav-section {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 35px;
+      margin-bottom: 40px;
+      box-shadow: 0 10px 30px var(--shadow);
+      border: 1px solid rgba(228, 122, 36, 0.1);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .quick-nav-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(228, 122, 36, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .quick-nav-section:hover::before {
+      left: 100%;
+    }
+
+    .nav-title {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--pineapple);
+      margin-bottom: 30px;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .nav-title i {
+      color: var(--apricot);
+      font-size: 2rem;
+      animation: rotate 3s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: linear-gradient(135deg, var(--white), var(--light-gray));
+      border: 2px solid rgba(228, 122, 36, 0.2);
+      border-radius: 18px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      font-family: 'Noto Sans Bengali', sans-serif;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .nav-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--apricot), var(--blood-orange));
+      transition: left 0.5s ease;
+      z-index: -1;
+    }
+
+    .nav-btn:hover::before {
+      left: 0;
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-8px) scale(1.03);
+      border-color: var(--apricot);
+      box-shadow: 0 15px 35px rgba(228, 122, 36, 0.3);
+      color: var(--white);
+    }
+
+    .nav-btn:hover .btn-icon,
+    .nav-btn:hover .btn-content,
+    .nav-btn:hover .btn-arrow {
+      color: var(--white);
+    }
+
+    .nav-btn:active {
+      transform: translateY(-5px) scale(0.98);
+    }
+
+    .btn-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--apricot), var(--blood-orange));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--white);
+      box-shadow: 0 8px 20px rgba(228, 122, 36, 0.3);
+      transition: all 0.3s ease;
+      animation: iconFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes iconFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .nav-btn:hover .btn-icon {
+      background: var(--white);
+      color: var(--apricot);
+      transform: scale(1.1);
+    }
+
+    .btn-content {
+      flex: 1;
+      text-align: left;
+      transition: all 0.3s ease;
+    }
+
+    .btn-title {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--pineapple);
+      margin-bottom: 5px;
+      transition: color 0.3s ease;
+    }
+
+    .btn-subtitle {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      opacity: 0.7;
+      transition: color 0.3s ease;
+    }
+
+    .btn-arrow {
+      font-size: 1.2rem;
+      color: var(--apricot);
+      transition: all 0.3s ease;
+    }
+
+    .nav-btn:hover .btn-arrow {
+      transform: translateX(5px);
+      color: var(--white);
+    }
+
+    .special-btn {
+      background: linear-gradient(135deg, var(--apricot), var(--blood-orange));
+      color: var(--white);
+      border-color: var(--blood-orange);
+    }
+
+    .special-btn .btn-title,
+    .special-btn .btn-subtitle,
+    .special-btn .btn-arrow {
+      color: var(--white);
+    }
+
+    .special-btn .btn-icon {
+      background: var(--white);
+      color: var(--apricot);
+    }
+
+    .special-btn:hover .btn-icon {
+      background: var(--candy-apple);
+      color: var(--white);
+    }
+
+    /* Grid Layout */
+    .pandel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    /* Section Cards */
+    .pandel-section {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 35px;
+      box-shadow: 0 10px 30px var(--shadow);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(228, 122, 36, 0.1);
+      animation: fadeInUp 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
+    .pandel-section:nth-child(1) { animation-delay: 0.1s; }
+    .pandel-section:nth-child(2) { animation-delay: 0.2s; }
+    .pandel-section:nth-child(3) { animation-delay: 0.3s; }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .pandel-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(228, 122, 36, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .pandel-section:hover::before {
+      left: 100%;
+    }
+
+    .pandel-section:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px var(--shadow-hover);
+      border-color: var(--apricot);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid rgba(228, 122, 36, 0.2);
+    }
+
+    .section-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--apricot), var(--blood-orange));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--white);
+      box-shadow: 0 8px 20px rgba(228, 122, 36, 0.3);
+      animation: iconPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes iconPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--pineapple);
+      flex: 1;
+    }
+
+    /* Pandel List */
+    .pandel-list {
+      list-style: none;
+      max-height: 400px;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
+
+    .pandel-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .pandel-list::-webkit-scrollbar-track {
+      background: var(--light-gray);
+      border-radius: 3px;
+    }
+
+    .pandel-list::-webkit-scrollbar-thumb {
+      background: var(--apricot);
+      border-radius: 3px;
+    }
+
+    .pandel-item {
+      background: var(--light-gray);
+      margin: 12px 0;
+      padding: 18px;
+      border-radius: 12px;
+      border-left: 4px solid var(--apricot);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pandel-item::before {
+      content: '';
+      position: absolute;
+      left: -4px;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(135deg, var(--apricot), var(--blood-orange));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .pandel-item:hover {
+      transform: translateX(8px);
+      box-shadow: 0 8px 25px rgba(228, 122, 36, 0.15);
+      background: var(--white);
+      border-left-color: var(--blood-orange);
+    }
+
+    .pandel-item:hover::before {
+      opacity: 1;
+    }
+
+    .pandel-place {
+      font-weight: 600;
+      color: var(--candy-apple);
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
+
+    .pandel-name {
+      color: var(--text-dark);
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+
+    /* Highlight styles for search results */
     .highlight {
-      background-color: #fef08a;
-      font-weight: bold;
-      border-radius: 5px;
-      padding: 2px 5px;
+      background: linear-gradient(135deg, var(--apricot), var(--blood-orange));
+      color: var(--white);
+      animation: highlightPulse 2s ease-in-out infinite;
+      box-shadow: 0 5px 15px rgba(228, 122, 36, 0.4);
+    }
+
+    @keyframes highlightPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    .highlight .pandel-place,
+    .highlight .pandel-name {
+      color: var(--white);
+      opacity: 1;
+    }
+
+    /* No results message */
+    .no-results {
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #fee2e2, #fecaca);
+      border-radius: 15px;
+      border: 2px solid #f87171;
+      color: #dc2626;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .no-results i {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .pandel-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .pandel-section {
+        padding: 25px;
+      }
+      
+      header {
+        padding: 30px 20px;
+      }
+      
+      main {
+        padding: 30px 15px;
+      }
+      
+      .search-section, .quick-nav-section {
+        padding: 25px;
+      }
+
+      .button-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .nav-btn {
+        padding: 18px;
+        gap: 15px;
+      }
+
+      .btn-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+      }
+
+      .nav-title {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Loading Animation */
+    .loading {
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
     }
   </style>
 </head>
-<body class="font-sans">
-  <header class="bg-pink-700 text-white text-center py-6 shadow-lg text-3xl font-bold tracking-wide">
-    📍 এখনই দেখুন - লাইভ আপডেট
+<body>
+  <div class="particles" id="particles"></div>
+
+  <header>
+    <h1><i class="fas fa-map-marked-alt"></i> এখনই দেখুন - পুজো প্যান্ডেল ম্যাপ</h1>
   </header>
 
-  <main class="p-10">
-    <!-- Search Section -->
-    <div class="mb-8">
-      <label for="placeSearch" class="block text-lg font-bold mb-2">📌 জায়গা বা প্যান্ডেলের নাম লিখুন:</label>
-      <input type="text" id="placeSearch" placeholder="যেমন: BELGACHIA" 
-        class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500">
-      <button onclick="searchPandals()" class="mt-3 bg-pink-700 text-white px-4 py-2 rounded-lg hover:bg-pink-800">
-        🔍 খুঁজুন
+  <main>
+    <!-- Language Switcher -->
+    <div class="language-switcher" style="position: fixed; top: 10px; right: 20px; z-index: 1000;">
+      <button class="lang-btn" data-lang="en">English</button>
+      <button class="lang-btn" data-lang="hi">हिन्दी</button>
+      <button class="lang-btn" data-lang="bn">বাংলা</button>
+    </div>
+
+    <div class="search-section">
+      <label for="placeSearch" class="search-label">
+        <i class="fas fa-search-location"></i>
+        জায়গা বা প্যান্ডেলের নাম লিখুন:
+      </label>
+      <input type="text" id="placeSearch" placeholder="যেমন: BELGACHIA, BAGBAZAR, SINGHI PARK..." 
+        class="search-input">
+      <button onclick="searchPandals()" class="search-btn">
+        <i class="fas fa-search"></i>
+        খুঁজুন
       </button>
     </div>
 
-    <!-- Three Column Layout -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div>
-        <h2 class="text-2xl font-bold text-pink-700 mb-3">🏙️ North Kolkata Pujo</h2>
-        <ul id="northList" class="list-disc pl-5 space-y-1 bg-white p-4 rounded-lg shadow"></ul>
+    <div class="stats-bar" id="statsBar">
+      <span>মোট প্যান্ডেল: <span class="stats-counter" id="totalCount">0</span></span>
+      <span>উত্তর কলকাতা: <span class="stats-counter" id="northCount">0</span></span>
+      <span>দক্ষিণ কলকাতা: <span class="stats-counter" id="southCount">0</span></span>
+      <span>গ্রিন লাইন: <span class="stats-counter" id="greenCount">0</span></span>
+    </div>
+
+    <!-- Quick Navigation Buttons -->
+    <div class="quick-nav-section">
+      <h3 class="nav-title">
+        <i class="fas fa-compass"></i>
+        দ্রুত নেভিগেশন
+      </h3>
+      <div class="button-grid">
+        <button class="nav-btn" onclick="scrollToSection('northList')" data-section="north">
+          <div class="btn-icon">
+            <i class="fas fa-city"></i>
+          </div>
+          <div class="btn-content">
+            <span class="btn-title">উত্তর কলকাতা</span>
+            <span class="btn-subtitle">ঐতিহ্যবাহী পুজো</span>
+          </div>
+          <div class="btn-arrow">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </button>
+
+        <button class="nav-btn" onclick="scrollToSection('southList')" data-section="south">
+          <div class="btn-icon">
+            <i class="fas fa-building"></i>
+          </div>
+          <div class="btn-content">
+            <span class="btn-title">দক্ষিণ কলকাতা</span>
+            <span class="btn-subtitle">আধুনিক প্যান্ডেল</span>
+          </div>
+          <div class="btn-arrow">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </button>
+
+        <button class="nav-btn" onclick="scrollToSection('greenLineList')" data-section="green">
+          <div class="btn-icon">
+            <i class="fas fa-subway"></i>
+          </div>
+          <div class="btn-content">
+            <span class="btn-title">গ্রিন লাইন মেট্রো</span>
+            <span class="btn-subtitle">সহজ যাতায়াত</span>
+          </div>
+          <div class="btn-arrow">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </button>
+
+        <button class="nav-btn special-btn" onclick="showAllPandals()">
+          <div class="btn-icon">
+            <i class="fas fa-eye"></i>
+          </div>
+          <div class="btn-content">
+            <span class="btn-title">সব প্যান্ডেল দেখুন</span>
+            <span class="btn-subtitle">সম্পূর্ণ তালিকা</span>
+          </div>
+          <div class="btn-arrow">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </button>
+
+        <button class="nav-btn" onclick="showPopularPandals()">
+          <div class="btn-icon">
+            <i class="fas fa-star"></i>
+          </div>
+          <div class="btn-content">
+            <span class="btn-title">জনপ্রিয় প্যান্ডেল</span>
+            <span class="btn-subtitle">বিশেষ সুপারিশ</span>
+          </div>
+          <div class="btn-arrow">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </button>
+
+        <button class="nav-btn" onclick="showNearbyPandals()">
+          <div class="btn-icon">
+            <i class="fas fa-location-arrow"></i>
+          </div>
+          <div class="btn-content">
+            <span class="btn-title">কাছের প্যান্ডেল</span>
+            <span class="btn-subtitle">আপনার এলাকায়</span>
+          </div>
+          <div class="btn-arrow">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </button>
       </div>
-      <div>
-        <h2 class="text-2xl font-bold text-pink-700 mb-3">🌆 South Kolkata Pujo</h2>
-        <ul id="southList" class="list-disc pl-5 space-y-1 bg-white p-4 rounded-lg shadow"></ul>
+    </div>
+
+    <div class="pandel-grid">
+      <div class="pandel-section">
+        <div class="section-header">
+          <div class="section-icon">
+            <i class="fas fa-city"></i>
+          </div>
+          <h2 class="section-title">🏙️ উত্তর কলকাতার পুজো</h2>
+        </div>
+        <ul id="northList" class="pandel-list"></ul>
       </div>
-      <div>
-        <h2 class="text-2xl font-bold text-pink-700 mb-3">🚇 Green Line Metro (North)</h2>
-        <ul id="greenLineList" class="list-disc pl-5 space-y-1 bg-white p-4 rounded-lg shadow"></ul>
+
+      <div class="pandel-section">
+        <div class="section-header">
+          <div class="section-icon">
+            <i class="fas fa-building"></i>
+          </div>
+          <h2 class="section-title">🌆 দক্ষিণ কলকাতার পুজো</h2>
+        </div>
+        <ul id="southList" class="pandel-list"></ul>
+      </div>
+
+      <div class="pandel-section">
+        <div class="section-header">
+          <div class="section-icon">
+            <i class="fas fa-subway"></i>
+          </div>
+          <h2 class="section-title">🚇 গ্রিন লাইন মেট্রো (উত্তর)</h2>
+        </div>
+        <ul id="greenLineList" class="pandel-list"></ul>
       </div>
     </div>
   </main>
 
 <script>
-// North Kolkata
-const northKolkata = [
-  { place: "NOAPARA", pandal: "NUAPA-DA DADABHAI SANGHA" },
-  { place: "BELGACHIA", pandal: "TALA PARK PRATTAY" },
-  { place: "BELGACHIA", pandal: "TALA BAROWARI" },
-  { place: "BELGACHIA", pandal: "BELGACHIA SADHARAN DURGOSAB" },
-  { place: "BELGACHIA", pandal: "BELGACHIA CENTRAL SARBOJANIN" },
-  { place: "SHYAMBAZAR", pandal: "BAGBAZAR SARBOJONIN" },
-  { place: "SHYAMBAZAR", pandal: "SHYAMBAZAR FRIENDS UNION" },
-  { place: "SHYAMBAZAR", pandal: "SIKDAR BAGAN" },
-  { place: "SHYAMBAZAR", pandal: "NALIN SARKAR STREET" },
-  { place: "SHOBHABAJAR", pandal: "JAGAT MUKHERJEE PARK" },
-  { place: "SHOBHABAJAR", pandal: "SHOBHABAZAR RAJBARI" },
-  { place: "SHOBHABAJAR", pandal: "SANGHATIRTA" },
-  { place: "SHOBHABAJAR", pandal: "KUMARTULI PARK" },
-  { place: "GIRISH PARK", pandal: "JORASANKO SADHARAN DURGOTSAB" },
-  { place: "GIRISH PARK", pandal: "KASHI BOSE LANE" },
-  { place: "GIRISH PARK", pandal: "CHALTABAGN" },
-  { place: "MG ROAD", pandal: "CHOREBAGAN SARBOJONIN" },
-  { place: "MG ROAD", pandal: "MD ALI PARK" },
-  { place: "MG ROAD", pandal: "COLLEGE SQUARE" }
-];
+    const translations = {
+        bn: {
+            title: "এখনই দেখুন - পুজো প্যান্ডেল ম্যাপ",
+            searchLabel: "জায়গা বা প্যান্ডেলের নাম লিখুন:",
+            searchPlaceholder: "যেমন: BELGACHIA, BAGBAZAR, SINGHI PARK...",
+            searchBtn: "খুঁজুন",
+            stats: ["মোট প্যান্ডেল:", "উত্তর কলকাতা:", "দক্ষিণ কলকাতা:", "গ্রিন লাইন:"],
+            quickNav: "দ্রুত নেভিগেশন",
+            north: ["উত্তর কলকাতা", "ঐতিহ্যবাহী পুজো"],
+            south: ["দক্ষিণ কলকাতা", "আধুনিক প্যান্ডেল"],
+            green: ["গ্রিন লাইন মেট্রো", "সহজ যাতায়াত"],
+            all: ["সব প্যান্ডেল দেখুন", "সম্পূর্ণ তালিকা"],
+            popular: ["জনপ্রিয় প্যান্ডেল", "সবার প্রিয়"],
+            nearby: ["কাছের প্যান্ডেল", "আপনার এলাকায়"]
+        },
+        en: {
+            title: "Live Now - Puja Pandal Map",
+            searchLabel: "Enter place or pandal name:",
+            searchPlaceholder: "e.g. BELGACHIA, BAGBAZAR, SINGHI PARK...",
+            searchBtn: "Search",
+            stats: ["Total Pandals:", "North Kolkata:", "South Kolkata:", "Green Line:"],
+            quickNav: "Quick Navigation",
+            north: ["North Kolkata", "Heritage Pujas"],
+            south: ["South Kolkata", "Modern Pandals"],
+            green: ["Green Line Metro", "Easy Travel"],
+            all: ["View All Pandals", "Complete List"],
+            popular: ["Popular Pandals", "Most Visited"],
+            nearby: ["Nearby Pandals", "In Your Area"]
+        },
+        hi: {
+            title: "अभी देखें - पूजा पंडाल मानचित्र",
+            searchLabel: "जगह या पंडाल का नाम लिखें:",
+            searchPlaceholder: "जैसे: BELGACHIA, BAGBAZAR, SINGHI PARK...",
+            searchBtn: "खोजें",
+            stats: ["कुल पंडाल:", "उत्तर कोलकाता:", "दक्षिण कोलकाता:", "ग्रीन लाइन:"],
+            quickNav: "त्वरित नेविगेशन",
+            north: ["उत्तर कोलकाता", "पारंपरिक पूजा"],
+            south: ["दक्षिण कोलकाता", "आधुनिक पंडाल"],
+            green: ["ग्रीन लाइन मेट्रो", "सुविधाजनक यात्रा"],
+            all: ["सभी पंडाल देखें", "पूर्ण सूची"],
+            popular: ["लोकप्रिय पंडाल", "सबके पसंदीदा"],
+            nearby: ["नजदीकी पंडाल", "आपके क्षेत्र में"]
+        }
+    };
+    function switchLanguage(lang) {
+        const t = translations[lang];
 
-// Green Line Metro (North)
-const greenLineMetroNorth = [
-  { place: "GREEN LINE METRO", pandal: "SEALDAH" },
-  { place: "SEALDAH", pandal: "SANTOSH MITRA SQUARE" },
-  { place: "SEALDAH", pandal: "SEALDAH RAILWAY ATHLETIC CLUB" },
-  { place: "PHOOLBAGAN", pandal: "BELIGHATA 33 PALLY" },
-  { place: "PHOOLBAGAN", pandal: "NABAMILAN DURGA PUJA" },
-  { place: "PHOOLBAGAN", pandal: "SANDHANI CLUB" }
-];
+        // Header
+        document.querySelector("header h1").innerHTML = `<i class="fas fa-map-marked-alt"></i> ${t.title}`;
 
-// South Kolkata
-const southKolkata = [
-  { place: "KALIGHAT", pandal: "66 PALLY" },
-  { place: "KALIGHAT", pandal: "BADAMTALA ASHAR SANGHA" },
-  { place: "KALIGHAT", pandal: "NEPAL BHATTACHARYA STREET" },
-  { place: "KALIGHAT", pandal: "CHETLA AGRANI" },
-  { place: "KALIGHAT", pandal: "DESHOPRIYO PARK" },
-  { place: "KALIGHAT", pandal: "BALLYGUNGE CULTURAL" },
-  { place: "KALIGHAT", pandal: "SOMAJ SEBI" },
-  { place: "KALIGHAT", pandal: "HINDUSTAN PARK" },
-  { place: "KALIGHAT", pandal: "SINGHI PARK" },
-  { place: "KALIGHAT", pandal: "EKDALIA EVERGREEN" },
-  { place: "KALIGHAT", pandal: "21 PALLY" },
-  { place: "TALLYGUANGE", pandal: "HERIDEBPUR 41 PALLY" },
-  { place: "TALLYGUANGE", pandal: "AJAY SANGHATI" },
-  { place: "TALLYGUANGE", pandal: "VIVEKANANDA SPORTING CLUB" },
-  { place: "TALLYGUANGE", pandal: "VIVEKANANDA PARK ATHLETIC CLUB" },
-  { place: "TALLYGUANGE", pandal: "BARISH CLUB" },
-  { place: "TALLYGUANGE", pandal: "PALLY SHARADIYA" },
-  { place: "RABINDRA SAROBAR", pandal: "SURUCHI SANGHA" },
-  { place: "RABINDRA SAROBAR", pandal: "MUDIALI PARK" },
-  { place: "RABINDRA SAROBAR", pandal: "SHIB MANDIR" },
-  { place: "NETAJI BHAWAN", pandal: "22 PALLY" },
-  { place: "NETAJI BHAWAN", pandal: "76 PALLY" },
-  { place: "MADOX SQUARE", pandal: "MUKTADAL" },
-  { place: "KAVI NAZRUL", pandal: "NOBO DURGA" },
-  { place: "JATIN DAS PARK", pandal: "HAZRA PARK" },
-  { place: "GITANJALI", pandal: "NAKLATA UDAYAN SANGHA" }
-];
+        // Search section
+        document.querySelector(".search-label").innerHTML = `<i class="fas fa-search-location"></i> ${t.searchLabel}`;
+        document.getElementById("placeSearch").placeholder = t.searchPlaceholder;
+        document.querySelector(".search-btn").innerHTML = `<i class="fas fa-search"></i> ${t.searchBtn}`;
 
-function renderLists() {
-  document.getElementById("northList").innerHTML = northKolkata.map(p => `<li>${p.place} - ${p.pandal}</li>`).join("");
-  document.getElementById("greenLineList").innerHTML = greenLineMetroNorth.map(p => `<li>${p.place} - ${p.pandal}</li>`).join("");
-  document.getElementById("southList").innerHTML = southKolkata.map(p => `<li>${p.place} - ${p.pandal}</li>`).join("");
-}
+        // Stats bar
+        const statsSpans = document.querySelectorAll("#statsBar span");
+        statsSpans[0].childNodes[0].nodeValue = t.stats[0] + " ";
+        statsSpans[1].childNodes[0].nodeValue = t.stats[1] + " ";
+        statsSpans[2].childNodes[0].nodeValue = t.stats[2] + " ";
+        statsSpans[3].childNodes[0].nodeValue = t.stats[3] + " ";
+        statsSpans[4].childNodes[0].nodeValue = t.stats[4] + " ";
 
-function searchPandals() {
-  const searchText = document.getElementById("placeSearch").value.trim().toUpperCase();
+        // Quick navigation
+        document.querySelector(".nav-title").innerHTML = `<i class="fas fa-compass"></i> ${t.quickNav}`;
+        const buttons = document.querySelectorAll(".button-grid .nav-btn");
+        buttons[0].querySelector(".btn-title").innerText = t.north[0];
+        buttons[0].querySelector(".btn-subtitle").innerText = t.north[1];
+        buttons[1].querySelector(".btn-title").innerText = t.south[0];
+        buttons[1].querySelector(".btn-subtitle").innerText = t.south[1];
+        buttons[2].querySelector(".btn-title").innerText = t.green[0];
+        buttons[2].querySelector(".btn-subtitle").innerText = t.green[1];
+        buttons[3].querySelector(".btn-title").innerText = t.all[0];
+        buttons[3].querySelector(".btn-subtitle").innerText = t.all[1];
+        buttons[4].querySelector(".btn-title").innerText = t.popular[0];
+        buttons[4].querySelector(".btn-subtitle").innerText = t.popular[1];
+        buttons[5].querySelector(".btn-title").innerText = t.nearby[0];
+        buttons[5].querySelector(".btn-subtitle").innerText = t.nearby[1];
 
-  const northResults = northKolkata.filter(p => 
-    p.place.toUpperCase() === searchText || p.pandal.toUpperCase() === searchText
-  );
+        // Language button active state
+        document.querySelectorAll(".lang-btn").forEach(btn => btn.classList.remove("active"));
+        document.querySelector(`.lang-btn[data-lang="${lang}"]`).classList.add("active");
+    }
 
-  const greenLineResults = greenLineMetroNorth.filter(p => 
-    p.place.toUpperCase() === searchText || p.pandal.toUpperCase() === searchText
-  );
+    // Language switcher event listeners
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+      btn.addEventListener("click", () => switchLanguage(btn.dataset.lang));
+    });
 
-  const southResults = southKolkata.filter(p => 
-    p.place.toUpperCase() === searchText || p.pandal.toUpperCase() === searchText
-  );
+    // Default: Bengali
+    switchLanguage("bn");
 
-  document.getElementById("northList").innerHTML = northResults.length > 0 
-    ? northResults.map(p => `<li class="highlight">${p.place} - ${p.pandal}</li>`).join("") 
-    : `<p class="text-red-500 font-bold">❌ কোনো প্যান্ডেল পাওয়া যায়নি</p>`;
+    // North Kolkata
+    const northKolkata = [
+      { place: "NOAPARA", pandal: "NUAPA-DA DADABHAI SANGHA" },
+      { place: "BELGACHIA", pandal: "TALA PARK PRATTAY" },
+      { place: "BELGACHIA", pandal: "TALA BAROWARI" },
+      { place: "BELGACHIA", pandal: "BELGACHIA SADHARAN DURGOSAB" },
+      { place: "BELGACHIA", pandal: "BELGACHIA CENTRAL SARBOJANIN" },
+      { place: "SHYAMBAZAR", pandal: "BAGBAZAR SARBOJONIN" },
+      { place: "SHYAMBAZAR", pandal: "SHYAMBAZAR FRIENDS UNION" },
+      { place: "SHYAMBAZAR", pandal: "SIKDAR BAGAN" },
+      { place: "SHYAMBAZAR", pandal: "NALIN SARKAR STREET" },
+      { place: "SHOBHABAJAR", pandal: "JAGAT MUKHERJEE PARK" },
+      { place: "SHOBHABAJAR", pandal: "SHOBHABAZAR RAJBARI" },
+      { place: "SHOBHABAJAR", pandal: "SANGHATIRTA" },
+      { place: "SHOBHABAJAR", pandal: "KUMARTULI PARK" },
+      { place: "GIRISH PARK", pandal: "JORASANKO SADHARAN DURGOTSAB" },
+      { place: "GIRISH PARK", pandal: "KASHI BOSE LANE" },
+      { place: "GIRISH PARK", pandal: "CHALTABAGN" },
+      { place: "MG ROAD", pandal: "CHOREBAGAN SARBOJONIN" },
+      { place: "MG ROAD", pandal: "MD ALI PARK" },
+      { place: "MG ROAD", pandal: "COLLEGE SQUARE" }
+    ];
 
-  document.getElementById("greenLineList").innerHTML = greenLineResults.length > 0 
-    ? greenLineResults.map(p => `<li class="highlight">${p.place} - ${p.pandal}</li>`).join("") 
-    : `<p class="text-red-500 font-bold">❌ কোনো প্যান্ডেল পাওয়া যায়নি</p>`;
+    // Green Line Metro (North)
+     const greenLineMetroNorth = [
+      { place: "GREEN LINE METRO", pandal: "SEALDAH" },
+      { place: "SEALDAH", pandal: "SANTOSH MITRA SQUARE" },
+      { place: "SEALDAH", pandal: "SEALDAH RAILWAY ATHLETIC CLUB" },
+      { place: "PHOOLBAGAN", pandal: "BELIGHATA 33 PALLY" },
+      { place: "PHOOLBAGAN", pandal: "NABAMILAN DURGA PUJA" },
+      { place: "PHOOLBAGAN", pandal: "SANDHANI CLUB" }
+    ];
 
-  document.getElementById("southList").innerHTML = southResults.length > 0 
-    ? southResults.map(p => `<li class="highlight">${p.place} - ${p.pandal}</li>`).join("") 
-    : `<p class="text-red-500 font-bold">❌ কোনো প্যান্ডেল পাওয়া যায়নি</p>`;
-}
+    const southKolkata = [
+      { place: "KALIGHAT", pandal: "66 PALLY" },
+      { place: "KALIGHAT", pandal: "BADAMTALA ASHAR SANGHA" },
+      { place: "KALIGHAT", pandal: "NEPAL BHATTACHARYA STREET" },
+      { place: "KALIGHAT", pandal: "CHETLA AGRANI" },
+      { place: "KALIGHAT", pandal: "DESHOPRIYO PARK" },
+      { place: "KALIGHAT", pandal: "BALLYGUNGE CULTURAL" },
+      { place: "KALIGHAT", pandal: "SOMAJ SEBI" },
+      { place: "KALIGHAT", pandal: "HINDUSTAN PARK" },
+      { place: "KALIGHAT", pandal: "SINGHI PARK" },
+      { place: "KALIGHAT", pandal: "EKDALIA EVERGREEN" },
+      { place: "KALIGHAT", pandal: "21 PALLY" },
+      { place: "TALLYGUANGE", pandal: "HERIDEBPUR 41 PALLY" },
+      { place: "TALLYGUANGE", pandal: "AJAY SANGHATI" },
+      { place: "TALLYGUANGE", pandal: "VIVEKANANDA SPORTING CLUB" },
+      { place: "TALLYGUANGE", pandal: "VIVEKANANDA PARK ATHLETIC CLUB" },
+      { place: "TALLYGUANGE", pandal: "BARISH CLUB" },
+      { place: "TALLYGUANGE", pandal: "PALLY SHARADIYA" },
+      { place: "RABINDRA SAROBAR", pandal: "SURUCHI SANGHA" },
+      { place: "RABINDRA SAROBAR", pandal: "MUDIALI PARK" },
+      { place: "RABINDRA SAROBAR", pandal: "SHIB MANDIR" },
+      { place: "NETAJI BHAWAN", pandal: "22 PALLY" },
+      { place: "NETAJI BHAWAN", pandal: "76 PALLY" },
+      { place: "MADOX SQUARE", pandal: "MUKTADAL" },
+      { place: "KAVI NAZRUL", pandal: "NOBO DURGA" },
+      { place: "JATIN DAS PARK", pandal: "HAZRA PARK" },
+      { place: "GITANJALI", pandal: "NAKLATA UDAYAN SANGHA" }
+    ];
 
-renderLists();
-</script>
+    function createPandalItem(pandal, isHighlight = false) {
+      return `
+        <li class="pandel-item ${isHighlight ? 'highlight' : ''}">
+          <div class="pandel-place">${pandal.place}</div>
+          <div class="pandel-name">${pandal.pandal}</div>
+        </li>
+      `;
+    }
+
+    function updateStats() {
+      document.getElementById('northCount').textContent = northKolkata.length;
+      document.getElementById('southCount').textContent = southKolkata.length;
+      document.getElementById('greenCount').textContent = greenLineMetroNorth.length;
+      document.getElementById('totalCount').textContent = northKolkata.length + southKolkata.length + greenLineMetroNorth.length;
+    }
+
+    function renderLists() {
+      document.getElementById("northList").innerHTML = northKolkata.map(p => createPandalItem(p)).join("");
+      document.getElementById("greenLineList").innerHTML = greenLineMetroNorth.map(p => createPandalItem(p)).join("");
+      document.getElementById("southList").innerHTML = southKolkata.map(p => createPandalItem(p)).join("");
+      updateStats();
+    }
+
+    function searchPandals() {
+      const searchText = document.getElementById("placeSearch").value.trim().toUpperCase();
+      
+      if (!searchText) {
+        renderLists();
+        return;
+      }
+
+      const northResults = northKolkata.filter(p => 
+        p.place.toUpperCase().includes(searchText) || p.pandal.toUpperCase().includes(searchText)
+      );
+
+      const greenLineResults = greenLineMetroNorth.filter(p => 
+        p.place.toUpperCase().includes(searchText) || p.pandal.toUpperCase().includes(searchText)
+      );
+
+      const southResults = southKolkata.filter(p => 
+        p.place.toUpperCase().includes(searchText) || p.pandal.toUpperCase().includes(searchText)
+      );
+
+      document.getElementById("northList").innerHTML = northResults.length > 0 
+        ? northResults.map(p => createPandalItem(p, true)).join("") 
+        : `<div class="no-results"><i class="fas fa-search-minus"></i>কোনো প্যান্ডেল পাওয়া যায়নি</div>`;
+
+      document.getElementById("greenLineList").innerHTML = greenLineResults.length > 0 
+        ? greenLineResults.map(p => createPandalItem(p, true)).join("") 
+        : `<div class="no-results"><i class="fas fa-search-minus"></i>কোনো প্যান্ডেল পাওয়া যায়নি</div>`;
+
+      document.getElementById("southList").innerHTML = southResults.length > 0 
+        ? southResults.map(p => createPandalItem(p, true)).join("") 
+        : `<div class="no-results"><i class="fas fa-search-minus"></i>কোনো প্যান্ডেল পাওয়া যায়নি</div>`;
+    }
+
+    // Create floating particles
+    function createParticles() {
+      const particles = document.getElementById('particles');
+      const particleCount = 15;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.width = Math.random() * 8 + 4 + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.animationDelay = Math.random() * 8 + 's';
+        particle.style.animationDuration = (Math.random() * 3 + 6) + 's';
+        particles.appendChild(particle);
+      }
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      createParticles();
+      renderLists();
+      
+      // Add enter key support for search
+      document.getElementById('placeSearch').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          searchPandals();
+        }
+      });
+
+      // Add live search functionality
+      document.getElementById('placeSearch').addEventListener('input', function() {
+        if (this.value.trim() === '') {
+          renderLists();
+        }
+      });
+    });
+
+    // Add parallax effect to header
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      const scrolled = window.pageYOffset;
+      const rate = scrolled * -0.3;
+      
+      if (header) {
+        header.style.transform = `translateY(${rate}px)`;
+      }
+    });
+  </script>
 </body>
 </html>
