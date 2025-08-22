@@ -1,245 +1,371 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>বিশেষ পাস সংগ্রহের আবেদন</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Noto Sans Bengali', sans-serif;
-            background: linear-gradient(135deg, #fce4ec, #f8f9fa);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বিশেষ পাস সংগ্রহের আবেদন</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pineapple: #74685E;
+      --apricot: #E47A24;
+      --blood-orange: #BF2020;
+      --candy-apple: #951421;
+      --white: #ffffff;
+      --light-gray: #f8f9fa;
+      --text-dark: #2c3e50;
+      --shadow: rgba(0, 0, 0, 0.1);
+      --shadow-hover: rgba(0, 0, 0, 0.15);
+    }
 
-        .application-form {
-            max-width: 750px;
-            width: 100%;
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+    body {
+      font-family: 'Noto Sans Bengali', sans-serif;
+      margin: 0;
+      background: var(--light-gray);
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      padding: 20px;
+    }
 
-        .application-form:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.18);
-        }
+    header {
+      background-color: var(--blood-orange);
+      color: var(--white);
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px var(--shadow);
+    }
 
-        .form-heading {
-            color: #c2185b;
-            border-bottom: 3px solid #f48fb1;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-size: 26px;
-            font-weight: 700;
-            text-align: center;
-        }
+    .container {
+      max-width: 750px;
+      margin: 2rem auto;
+      background: var(--white);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px var(--shadow);
+      flex-grow: 1;
+    }
 
-        .instructions-list {
-            background: #fce4ec;
-            padding: 15px 20px;
-            border-radius: 8px;
-            list-style: none;
-            margin-bottom: 25px;
-        }
+    /* Language Switcher */
+    .lang-switch {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 20px;
+    }
+    .lang-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--white);
+      background: var(--pineapple);
+      transition: all 0.3s;
+    }
+    .lang-btn.active {
+      background: linear-gradient(135deg, var(--apricot), var(--blood-orange));
+    }
 
-        .instructions-list li {
-            margin-bottom: 10px;
-            color: #555;
-            font-size: 15px;
-            padding-left: 18px;
-            position: relative;
-        }
+    h2, h3 {
+      margin-top: 1rem;
+    }
 
-        .instructions-list li::before {
-            content: "✔";
-            color: #c2185b;
-            position: absolute;
-            left: 0;
-            font-size: 14px;
-        }
+    h2 {
+      color: var(--candy-apple);
+      border-bottom: 2px solid var(--apricot);
+      padding-bottom: 5px;
+      text-align: center;
+    }
 
-        .form-section-title {
-            color: #6a1b9a;
-            font-size: 19px;
-            font-weight: 700;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            border-left: 4px solid #ba68c8;
-            padding-left: 10px;
-        }
+    h3 {
+      color: var(--blood-orange);
+      margin-top: 20px;
+      margin-bottom: 10px;
+      border-left: 4px solid var(--apricot);
+      padding-left: 8px;
+    }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 500;
-            color: #444;
-        }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      background-color: #fafafa;
+    }
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 14px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 15px;
-            transition: all 0.3s ease;
-            background-color: #fafafa;
-        }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--blood-orange);
+      background-color: var(--white);
+      box-shadow: 0 0 8px rgba(191, 32, 32, 0.2);
+    }
 
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #ab47bc;
-            background-color: #fff;
-            box-shadow: 0 0 8px rgba(171, 71, 188, 0.2);
-        }
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+    }
 
-        .form-group input[type="file"] {
-            background-color: #fff;
-        }
+    .checkbox-group input {
+      width: auto;
+      margin-right: 8px;
+    }
 
-        .form-group.checkbox-group {
-            display: flex;
-            align-items: flex-start;
-        }
+    .privacy-policy-link {
+      color: var(--apricot);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .privacy-policy-link:hover {
+      text-decoration: underline;
+    }
 
-        .form-group.checkbox-group input {
-            width: auto;
-            margin-right: 8px;
-            margin-top: 4px;
-        }
+    /* Submit Button */
+    .submit-btn {
+      background: linear-gradient(135deg, var(--blood-orange), var(--candy-apple));
+      color: var(--white);
+      border: none;
+      padding: 12px 28px;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 9999px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px var(--shadow);
+      transition: all 0.3s ease;
+    }
+    .submit-btn:hover {
+      background: linear-gradient(135deg, var(--candy-apple), var(--blood-orange));
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px var(--shadow-hover);
+    }
 
-        .privacy-policy-link {
-            color: #0288d1;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .privacy-policy-link:hover {
-            text-decoration: underline;
-        }
-
-        .submit-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #c2185b, #7b1fa2);
-            color: #fff;
-            border: none;
-            padding: 15px;
-            font-size: 17px;
-            font-weight: 700;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(124, 77, 255, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            background: linear-gradient(135deg, #ad1457, #6a1b9a);
-            box-shadow: 0 7px 20px rgba(124, 77, 255, 0.4);
-            transform: translateY(-2px);
-        }
-    </style>
+    /* Footer */
+    footer {
+      background: var(--pineapple);
+      color: var(--white);
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      box-shadow: 0 -2px 6px var(--shadow);
+      border-radius: 12px;
+    }
+  </style>
 </head>
 <body>
 
-    <form class="application-form">
-        <h2 class="form-heading">বিশেষ পাস সংগ্রহের প্রক্রিয়া</h2>
-        <p style="text-align:center; color:#666;">এই পাসটি শুধুমাত্র বিশেষ চাহিদা সম্পন্ন ব্যক্তিদের এবং তাদের একজন সাহায্যকারীর জন্য প্রযোজ্য।</p>
-        
-        <ul class="instructions-list">
-            <li>ফর্মটি পূরণ করুন।</li>
-            <li>প্রয়োজনীয় কাগজপত্র আপলোড করুন।</li>
-            <li>আবেদন জমা দিন।</li>
-        </ul>
+  <!-- Language Switcher -->
+  <div class="lang-switch">
+    <div class="lang-btn active" data-lang="bn">বাংলা</div>
+    <div class="lang-btn" data-lang="hi">हिन्दी</div>
+    <div class="lang-btn" data-lang="en">English</div>
+  </div>
 
-        <h3 class="form-section-title">১. আবেদনকারীর ব্যক্তিগত বিবরণ</h3>
-        <div class="form-group">
-            <label for="fullName">আবেদনকারীর সম্পূর্ণ নাম</label>
-            <input type="text" id="fullName" required>
-        </div>
-        <div class="form-group">
-            <label for="dob">জন্ম তারিখ</label>
-            <input type="date" id="dob" required>
-        </div>
-        <div class="form-group">
-            <label for="gender">লিঙ্গ</label>
-            <select id="gender" required>
-                <option value="" disabled selected>নির্বাচন করুন</option>
-                <option value="male">পুরুষ</option>
-                <option value="female">মহিলা</option>
-                <option value="other">অন্যান্য</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="mobileNumber">মোবাইল নম্বর</label>
-            <input type="tel" id="mobileNumber" required>
-        </div>
-        <div class="form-group">
-            <label for="email">ইমেল ঠিকানা</label>
-            <input type="email" id="email" required>
-        </div>
-        <div class="form-group">
-            <label for="address">পূর্ণাঙ্গ ঠিকানা</label>
-            <textarea id="address" rows="3" required></textarea>
-        </div>
+  <header id="page-header">বিশেষ পাস সংগ্রহের আবেদন</header>
 
-        <h3 class="form-section-title">২. প্রতিবন্ধিতা সম্পর্কিত তথ্য</h3>
-        <div class="form-group">
-            <label for="disabilityType">প্রতিবন্ধিতার ধরন</label>
-            <select id="disabilityType" required>
-                <option value="" disabled selected>নির্বাচন করুন</option>
-                <option value="physical">শারীরিক প্রতিবন্ধিতা</option>
-                <option value="visual">দৃষ্টি প্রতিবন্ধিতা</option>
-                <option value="hearing">শ্রবণ প্রতিবন্ধিতা</option>
-                <option value="cognitive">জ্ঞানীয় প্রতিবন্ধিতা</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="disabilityPercentage">প্রতিবন্ধিতার মাত্রা (শতাংশ)</label>
-            <input type="number" id="disabilityPercentage" min="0" max="100">
-        </div>
-        <div class="form-group">
-            <label for="specialNeeds">বিশেষ কোনো প্রয়োজন থাকলে উল্লেখ করুন।</label>
-            <textarea id="specialNeeds" rows="3"></textarea>
-        </div>
+  <div class="container" id="form-container">
+    <p id="description" style="text-align:center; color:#666;">
+      এই পাসটি শুধুমাত্র বিশেষ চাহিদা সম্পন্ন ব্যক্তিদের এবং তাদের একজন সাহায্যকারীর জন্য প্রযোজ্য।
+    </p>
 
-        <h3 class="form-section-title">৩. প্রয়োজনীয় কাগজপত্র আপলোড করুন</h3>
-        <div class="form-group">
-            <label>প্রতিবন্ধী পরিচয় পত্র (PwD ID card)</label>
-            <input type="file" required>
-        </div>
-        <div class="form-group">
-            <label>ডাক্তারের সনদপত্র (Doctor's certificate)</label>
-            <input type="file" required>
-        </div>
-        <div class="form-group">
-            <label>আবেদনকারীর সাম্প্রতিক ছবি (Recent photograph)</label>
-            <input type="file" required>
-        </div>
+    <h3 id="section1-title">১. আবেদনকারীর ব্যক্তিগত বিবরণ</h3>
+    <label id="fullName-label" for="fullName">আবেদনকারীর সম্পূর্ণ নাম</label>
+    <input type="text" id="fullName">
 
-        <div class="form-group checkbox-group">
-            <input type="checkbox" id="declaration" required>
-            <label for="declaration">আমি নিশ্চিত করছি যে উপরে প্রদত্ত সকল তথ্য সত্য এবং সঠিক।</label>
-        </div>
-        
-        <p style="font-size:14px;">আমাদের <a href="#" class="privacy-policy-link">গোপনীয়তা নীতি</a> পড়ুন।</p>
+    <label id="dob-label" for="dob">জন্ম তারিখ</label>
+    <input type="date" id="dob">
 
-        <button type="submit" class="submit-btn">আবেদন জমা দিন</button>
-    </form>
+    <label id="gender-label" for="gender">লিঙ্গ</label>
+    <select id="gender">
+      <option value="" disabled selected>নির্বাচন করুন</option>
+      <option value="male">পুরুষ</option>
+      <option value="female">মহিলা</option>
+      <option value="other">অন্যান্য</option>
+    </select>
+
+    <label id="mobile-label" for="mobileNumber">মোবাইল নম্বর</label>
+    <input type="tel" id="mobileNumber">
+
+    <label id="email-label" for="email">ইমেল ঠিকানা</label>
+    <input type="email" id="email">
+
+    <label id="address-label" for="address">পূর্ণাঙ্গ ঠিকানা</label>
+    <textarea id="address" rows="3"></textarea>
+
+    <h3 id="section2-title">২. প্রতিবন্ধিতা সম্পর্কিত তথ্য</h3>
+    <label id="disability-label" for="disabilityType">প্রতিবন্ধিতার ধরন</label>
+    <select id="disabilityType">
+      <option value="" disabled selected>নির্বাচন করুন</option>
+      <option value="physical">শারীরিক প্রতিবন্ধিতা</option>
+      <option value="visual">দৃষ্টি প্রতিবন্ধিতা</option>
+      <option value="hearing">শ্রবণ প্রতিবন্ধিতা</option>
+      <option value="cognitive">জ্ঞানীয় প্রতিবন্ধিতা</option>
+    </select>
+
+    <label id="disabilityPercent-label" for="disabilityPercentage">প্রতিবন্ধিতার মাত্রা (শতাংশ)</label>
+    <input type="number" id="disabilityPercentage" min="0" max="100">
+
+    <label id="specialNeeds-label" for="specialNeeds">বিশেষ কোনো প্রয়োজন থাকলে উল্লেখ করুন।</label>
+    <textarea id="specialNeeds" rows="3"></textarea>
+
+    <h3 id="section3-title">৩. প্রয়োজনীয় কাগজপত্র আপলোড করুন</h3>
+    <label id="pwd-label">প্রতিবন্ধী পরিচয় পত্র (PwD ID card)</label>
+    <input type="file">
+
+    <label id="doc-label">ডাক্তারের সনদপত্র (Doctor's certificate)</label>
+    <input type="file">
+
+    <label id="photo-label">আবেদনকারীর সাম্প্রতিক ছবি (Recent photograph)</label>
+    <input type="file">
+
+    <div class="checkbox-group">
+      <input type="checkbox" id="declaration">
+      <label id="declaration-label" for="declaration">আমি নিশ্চিত করছি যে উপরে প্রদত্ত সকল তথ্য সত্য এবং সঠিক।</label>
+    </div>
+
+    <p style="font-size:14px;">আমাদের <a href="#" class="privacy-policy-link" id="privacy-label">গোপনীয়তা নীতি</a> পড়ুন।</p>
+
+    <!-- Button -->
+    <div class="flex justify-center mt-6">
+      <button type="submit" class="submit-btn" id="submit-btn">আবেদন জমা দিন</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>© 2025 PujaSathi | Designed with ❤️</footer>
+
+  <script>
+    const langButtons = document.querySelectorAll('.lang-btn');
+
+    const translations = {
+      en: {
+        header: "Special Pass Application",
+        description: "This pass is applicable only for individuals with special needs and one attendant.",
+        section1: "1. Applicant's Personal Details",
+        fullName: "Full Name",
+        dob: "Date of Birth",
+        gender: "Gender",
+        genderOptions: ["Select", "Male", "Female", "Other"],
+        mobile: "Mobile Number",
+        email: "Email Address",
+        address: "Full Address",
+        section2: "2. Disability Details",
+        disability: "Type of Disability",
+        disabilityOptions: ["Select", "Physical", "Visual", "Hearing", "Cognitive"],
+        disabilityPercent: "Disability Percentage",
+        specialNeeds: "Mention any special needs",
+        section3: "3. Upload Required Documents",
+        pwd: "PwD ID card",
+        doc: "Doctor's certificate",
+        photo: "Recent photograph",
+        declaration: "I confirm that all information provided above is true and correct.",
+        privacy: "Read our Privacy Policy",
+        submit: "Submit Application"
+      },
+      hi: {
+        header: "विशेष पास आवेदन",
+        description: "यह पास केवल विशेष आवश्यकता वाले व्यक्तियों और उनके एक सहायक के लिए लागू है।",
+        section1: "1. आवेदक का व्यक्तिगत विवरण",
+        fullName: "पूरा नाम",
+        dob: "जन्म तिथि",
+        gender: "लिंग",
+        genderOptions: ["चुनें", "पुरुष", "महिला", "अन्य"],
+        mobile: "मोबाइल नंबर",
+        email: "ईमेल पता",
+        address: "पूरा पता",
+        section2: "2. विकलांगता संबंधी जानकारी",
+        disability: "विकलांगता का प्रकार",
+        disabilityOptions: ["चुनें", "शारीरिक", "दृष्टि", "श्रवण", "संज्ञानात्मक"],
+        disabilityPercent: "विकलांगता प्रतिशत",
+        specialNeeds: "विशेष आवश्यकताएँ बताएं",
+        section3: "3. आवश्यक दस्तावेज़ अपलोड करें",
+        pwd: "पीडब्ल्यूडी आईडी कार्ड",
+        doc: "डॉक्टर का प्रमाण पत्र",
+        photo: "हाल की फोटो",
+        declaration: "मैं पुष्टि करता हूँ कि उपरोक्त सभी जानकारी सही है।",
+        privacy: "हमारी गोपनीयता नीति पढ़ें",
+        submit: "आवेदन सबमिट करें"
+      },
+      bn: {
+        header: "বিশেষ পাস সংগ্রহের আবেদন",
+        description: "এই পাসটি শুধুমাত্র বিশেষ চাহিদা সম্পন্ন ব্যক্তিদের এবং তাদের একজন সাহায্যকারীর জন্য প্রযোজ্য।",
+        section1: "১. আবেদনকারীর ব্যক্তিগত বিবরণ",
+        fullName: "আবেদনকারীর সম্পূর্ণ নাম",
+        dob: "জন্ম তারিখ",
+        gender: "লিঙ্গ",
+        genderOptions: ["নির্বাচন করুন", "পুরুষ", "মহিলা", "অন্যান্য"],
+        mobile: "মোবাইল নম্বর",
+        email: "ইমেল ঠিকানা",
+        address: "পূর্ণাঙ্গ ঠিকানা",
+        section2: "২. প্রতিবন্ধিতা সম্পর্কিত তথ্য",
+        disability: "প্রতিবন্ধিতার ধরন",
+        disabilityOptions: ["নির্বাচন করুন", "শারীরিক প্রতিবন্ধিতা", "দৃষ্টি প্রতিবন্ধিতা", "শ্রবণ প্রতিবন্ধিতা", "জ্ঞানীয় প্রতিবন্ধিতা"],
+        disabilityPercent: "প্রতিবন্ধিতার মাত্রা (শতাংশ)",
+        specialNeeds: "বিশেষ কোনো প্রয়োজন থাকলে উল্লেখ করুন।",
+        section3: "৩. প্রয়োজনীয় কাগজপত্র আপলোড করুন",
+        pwd: "প্রতিবন্ধী পরিচয় পত্র (PwD ID card)",
+        doc: "ডাক্তারের সনদপত্র (Doctor's certificate)",
+        photo: "আবেদনকারীর সাম্প্রতিক ছবি (Recent photograph)",
+        declaration: "আমি নিশ্চিত করছি যে উপরে প্রদত্ত সকল তথ্য সত্য এবং সঠিক।",
+        privacy: "আমাদের গোপনীয়তা নীতি পড়ুন",
+        submit: "আবেদন জমা দিন"
+      }
+    };
+
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        langButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const lang = btn.dataset.lang;
+        const t = translations[lang];
+
+        document.getElementById('page-header').innerText = t.header;
+        document.getElementById('description').innerText = t.description;
+        document.getElementById('section1-title').innerText = t.section1;
+        document.getElementById('fullName-label').innerText = t.fullName;
+        document.getElementById('dob-label').innerText = t.dob;
+        document.getElementById('gender-label').innerText = t.gender;
+        const genderSelect = document.getElementById('gender');
+        genderSelect.options[0].text = t.genderOptions[0];
+        genderSelect.options[1].text = t.genderOptions[1];
+        genderSelect.options[2].text = t.genderOptions[2];
+        genderSelect.options[3].text = t.genderOptions[3];
+        document.getElementById('mobile-label').innerText = t.mobile;
+        document.getElementById('email-label').innerText = t.email;
+        document.getElementById('address-label').innerText = t.address;
+        document.getElementById('section2-title').innerText = t.section2;
+        document.getElementById('disability-label').innerText = t.disability;
+        const disabilitySelect = document.getElementById('disabilityType');
+        disabilitySelect.options[0].text = t.disabilityOptions[0];
+        disabilitySelect.options[1].text = t.disabilityOptions[1];
+        disabilitySelect.options[2].text = t.disabilityOptions[2];
+        disabilitySelect.options[3].text = t.disabilityOptions[3];
+        disabilitySelect.options[4].text = t.disabilityOptions[4];
+        document.getElementById('disabilityPercent-label').innerText = t.disabilityPercent;
+        document.getElementById('specialNeeds-label').innerText = t.specialNeeds;
+        document.getElementById('section3-title').innerText = t.section3;
+        document.getElementById('pwd-label').innerText = t.pwd;
+        document.getElementById('doc-label').innerText = t.doc;
+        document.getElementById('photo-label').innerText = t.photo;
+        document.getElementById('declaration-label').innerText = t.declaration;
+        document.getElementById('privacy-label').innerText = t.privacy;
+        document.getElementById('submit-btn').innerText = t.submit;
+      });
+    });
+  </script>
 
 </body>
 </html>
