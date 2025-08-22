@@ -4,163 +4,314 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PujaSathi পাস/বুকিং</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --pineapple: #74685E;
+      --apricot: #E47A24;
+      --blood-orange: #BF2020;
+      --candy-apple: #951421;
+      --white: #ffffff;
+      --light-gray: #f8f9fa;
+      --text-dark: #2c3e50;
+      --shadow: rgba(0, 0, 0, 0.1);
+      --shadow-hover: rgba(0, 0, 0, 0.15);
+    }
     body {
       font-family: 'Noto Sans Bengali', sans-serif;
+      background: var(--light-gray);
       margin: 0;
-      background: #fff8f0;
-      color: #333;
     }
-
     header {
-      background-color: #c62828;
-      color: white;
+      background-color: var(--candy-apple);
+      color: var(--white);
       padding: 1rem;
       text-align: center;
       font-size: 1.5rem;
       font-weight: bold;
       letter-spacing: 1px;
+      box-shadow: 0 2px 6px var(--shadow);
     }
-
+    .lang-switch {
+      display: flex;
+      gap: 1rem;
+      background: var(--pineapple);
+      border-radius: 9999px;
+      padding: 0.5rem 1rem;
+      box-shadow: 0 2px 6px var(--shadow);
+      justify-content: center;
+      margin: 1rem auto;
+      max-width: 300px;
+    }
+    .lang-btn {
+      color: var(--white);
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      transition: background 0.3s;
+    }
+    .lang-btn.active {
+      background: linear-gradient(135deg, var(--apricot), var(--blood-orange));
+    }
     .container {
       max-width: 700px;
-      margin: 2rem auto;
-      background: white;
+      margin: 1rem auto 3rem;
+      background: var(--white);
       padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      border-radius: 1rem;
+      box-shadow: 0 4px 10px var(--shadow);
     }
-
     h2 {
-      color: #b71c1c;
-      border-bottom: 2px solid #f8c8c8;
+      color: var(--candy-apple);
+      border-bottom: 2px solid var(--apricot);
       padding-bottom: 5px;
+      font-weight: bold;
+      margin-top: 1.5rem;
     }
-
     label {
       display: block;
       margin-top: 1rem;
       font-weight: bold;
     }
-
     input[type="text"],
     input[type="email"],
-    input[type="number"],
-    input[type="date"] {
+    input[type="date"],
+    input[type="number"] {
       width: 100%;
-      padding: 10px;
-      margin-top: 6px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      padding: 0.6rem;
+      margin-top: 0.3rem;
+      border: 2px solid var(--apricot);
+      border-radius: 0.5rem;
+      outline: none;
     }
-
+    input[type="number"]:focus,
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="date"]:focus {
+      border-color: var(--blood-orange);
+      box-shadow: 0 0 5px var(--blood-orange);
+    }
     .age-group {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin: 1rem 0;
     }
-
     .age-group input {
-      width: 60px;
+      width: 70px;
+      text-align: center;
     }
-
     .summary {
-      background: #e8f5e9;
+      background: var(--apricot);
+      color: var(--white);
       padding: 1rem;
       margin-top: 1rem;
-      border-radius: 6px;
+      border-radius: 0.5rem;
       font-weight: bold;
-      text-align: right;
-      color: #2e7d32;
+      text-align: center;
+      box-shadow: inset 0 2px 4px var(--shadow);
     }
-
-    .payment-section {
-      margin-top: 2rem;
+    .payment-section .payment-option {
+      margin: 0.8rem 0;
     }
-
-    .payment-option {
-      margin: 10px 0;
-    }
-
     button {
       margin-top: 1.5rem;
-      background: #4caf50;
-      color: white;
+      background: var(--blood-orange);
+      color: var(--white);
       padding: 10px 20px;
       border: none;
-      border-radius: 6px;
+      border-radius: 9999px;
       cursor: pointer;
       font-size: 1rem;
+      font-weight: bold;
+      box-shadow: 0 2px 6px var(--shadow);
+      transition: 0.3s;
     }
-
     button:hover {
-      background: #388e3c;
+      background: var(--candy-apple);
+    }
+    footer {
+      background: var(--pineapple);
+      color: var(--white);
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      box-shadow: 0 -2px 6px var(--shadow);
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
-  <header>PujaSathi পাস / বুকিং</header>
 
-  <div class="container">
-    <h2>যাত্রীর বিবরণ</h2>
-    <label for="name">পূর্ণ নাম</label>
-    <input type="text" id="name" placeholder="আপনার পূর্ণ নাম লিখুন" />
+<header id="header">PujaSathi পাস / বুকিং</header>
 
-    <label for="email">ইমেল</label>
-    <input type="email" id="email" placeholder="আপনার ইমেল আইডি লিখুন" />
+<div class="lang-switch">
+  <div class="lang-btn active">English</div>
+  <div class="lang-btn">हिन्दी</div>
+  <div class="lang-btn">বাংলা</div>
+</div>
 
-    <label for="date">প্যান্ডেল পরিদর্শনের তারিখ</label>
-    <input type="date" id="date" />
+<div class="container">
+  <h2 id="travelerTitle">যাত্রীর বিবরণ</h2>
+  <label for="name" id="nameLabel">পূর্ণ নাম</label>
+  <input type="text" id="name" placeholder="আপনার পূর্ণ নাম লিখুন" />
 
-    <h2>যাত্রী সংখ্যা ও মূল্য</h2>
-    <div class="age-group">
-      <span>1 - 12 বছর (₹250)</span>
-      <input type="number" id="age1" min="0" value="0" />
-    </div>
-    <div class="age-group">
-      <span>12 - 60 বছর (₹500)</span>
-      <input type="number" id="age2" min="0" value="0" />
-    </div>
-    <div class="age-group">
-      <span>60+ বছর (₹300)</span>
-      <input type="number" id="age3" min="0" value="0" />
-    </div>
+  <label for="email" id="emailLabel">ইমেল</label>
+  <input type="email" id="email" placeholder="আপনার ইমেল আইডি লিখুন" />
 
-    <div class="summary" id="total">মোট মূল্য: ₹0</div>
+  <label for="date" id="dateLabel">প্যান্ডেল পরিদর্শনের তারিখ</label>
+  <input type="date" id="date" />
 
-    <div class="payment-section">
-      <h2>পেমেন্ট অপশন</h2>
-      <div class="payment-option">
-        <input type="radio" name="payment" id="upi" checked />
-        <label for="upi">UPI (GPay/PhonePe)</label>
-      </div>
-      <div class="payment-option">
-        <input type="radio" name="payment" id="card" />
-        <label for="card">Debit/Credit Card</label>
-      </div>
-      <div class="payment-option">
-        <input type="radio" name="payment" id="netbanking" />
-        <label for="netbanking">Net Banking</label>
-      </div>
-    </div>
-
-    <button onclick="calculate()">🔒 বুকিং কনফার্ম করুন</button>
+  <h2 id="ticketTitle">যাত্রী সংখ্যা ও মূল্য</h2>
+  <div class="age-group">
+    <span id="age1Label">1 - 12 বছর (₹250)</span>
+    <input type="number" id="age1" min="0" value="0" />
+  </div>
+  <div class="age-group">
+    <span id="age2Label">12 - 60 বছর (₹500)</span>
+    <input type="number" id="age2" min="0" value="0" />
+  </div>
+  <div class="age-group">
+    <span id="age3Label">60+ বছর (₹300)</span>
+    <input type="number" id="age3" min="0" value="0" />
   </div>
 
-  <script>
-  function calculate() {
-    const a1 = parseInt(document.getElementById("age1").value) || 0;
-    const a2 = parseInt(document.getElementById("age2").value) || 0;
-    const a3 = parseInt(document.getElementById("age3").value) || 0;
+  <div class="summary" id="total">মোট মূল্য: ₹0</div>
 
-    const total = a1 * 250 + a2 * 500 + a3 * 300;
-    document.getElementById("total").innerText = `মোট মূল্য: ₹${total}`;
+  <div class="payment-section">
+    <h2 id="paymentTitle">পেমেন্ট অপশন</h2>
+    <div class="payment-option">
+      <input type="radio" name="payment" id="upi" checked />
+      <label for="upi" id="upiLabel">UPI (GPay/PhonePe)</label>
+    </div>
+    <div class="payment-option">
+      <input type="radio" name="payment" id="card" />
+      <label for="card" id="cardLabel">Debit/Credit Card</label>
+    </div>
+    <div class="payment-option">
+      <input type="radio" name="payment" id="netbanking" />
+      <label for="netbanking" id="netLabel">Net Banking</label>
+    </div>
+  </div>
+
+  <button id="bookBtn" onclick="calculate()">🔒 বুকিং কনফার্ম করুন</button>
+</div>
+
+<footer id="footer">© 2025 PujaSathi | Designed with ❤️</footer>
+
+<script>
+const age1Input = document.getElementById("age1");
+const age2Input = document.getElementById("age2");
+const age3Input = document.getElementById("age3");
+const totalDisplay = document.getElementById("total");
+
+const langButtons = document.querySelectorAll(".lang-btn");
+
+const translations = {
+  en: {
+    header: "PujaSathi Pass / Booking",
+    travelerTitle: "Traveler Details",
+    nameLabel: "Full Name",
+    emailLabel: "Email",
+    dateLabel: "Pandals Visit Date",
+    ticketTitle: "Passenger Count & Price",
+    age1: "1 - 12 years (₹250)",
+    age2: "12 - 60 years (₹500)",
+    age3: "60+ years (₹300)",
+    total: "Total: ₹",
+    paymentTitle: "Payment Options",
+    upi: "UPI (GPay/PhonePe)",
+    card: "Debit/Credit Card",
+    net: "Net Banking",
+    book: "🔒 Confirm Booking",
+    footer: "© 2025 PujaSathi | Designed with ❤️"
+  },
+  hi: {
+    header: "PujaSathi पास / बुकिंग",
+    travelerTitle: "यात्री विवरण",
+    nameLabel: "पूरा नाम",
+    emailLabel: "ईमेल",
+    dateLabel: "पंडाल यात्रा की तिथि",
+    ticketTitle: "यात्री संख्या और मूल्य",
+    age1: "1 - 12 वर्ष (₹250)",
+    age2: "12 - 60 वर्ष (₹500)",
+    age3: "60+ वर्ष (₹300)",
+    total: "कुल मूल्य: ₹",
+    paymentTitle: "भुगतान विकल्प",
+    upi: "UPI (GPay/PhonePe)",
+    card: "डेबिट/क्रेडिट कार्ड",
+    net: "नेट बैंकिंग",
+    book: "🔒 बुकिंग पुष्टि करें",
+    footer: "© 2025 PujaSathi | ❤️ के साथ डिज़ाइन किया गया"
+  },
+  bn: {
+    header: "PujaSathi পাস / বুকিং",
+    travelerTitle: "যাত্রীর বিবরণ",
+    nameLabel: "পূর্ণ নাম",
+    emailLabel: "ইমেল",
+    dateLabel: "প্যান্ডেল পরিদর্শনের তারিখ",
+    ticketTitle: "যাত্রী সংখ্যা ও মূল্য",
+    age1: "1 - 12 বছর (₹250)",
+    age2: "12 - 60 বছর (₹500)",
+    age3: "60+ বছর (₹300)",
+    total: "মোট মূল্য: ₹",
+    paymentTitle: "পেমেন্ট অপশন",
+    upi: "UPI (GPay/PhonePe)",
+    card: "ডেবিট/ক্রেডিট কার্ড",
+    net: "নেট ব্যাংকিং",
+    book: "🔒 বুকিং কনফার্ম করুন",
+    footer: "© 2025 PujaSathi | ❤️ দিয়ে ডিজাইন করা"
   }
+};
 
- 
-  calculate();
+function calculate() {
+  const a1 = parseInt(age1Input.value) || 0;
+  const a2 = parseInt(age2Input.value) || 0;
+  const a3 = parseInt(age3Input.value) || 0;
+
+  const lang = document.querySelector('.lang-btn.active').textContent.trim() === "English" ? "en" :
+               document.querySelector('.lang-btn.active').textContent.trim() === "हिन्दी" ? "hi" : "bn";
+
+  const total = a1*250 + a2*500 + a3*300;
+  totalDisplay.innerText = `${translations[lang].total}${total}`;
+}
+
+age1Input.addEventListener('input', calculate);
+age2Input.addEventListener('input', calculate);
+age3Input.addEventListener('input', calculate);
+
+langButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    langButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const lang = btn.textContent.trim() === "English" ? "en" :
+                 btn.textContent.trim() === "हिन्दी" ? "hi" : "bn";
+
+    document.getElementById("header").innerText = translations[lang].header;
+    document.getElementById("travelerTitle").innerText = translations[lang].travelerTitle;
+    document.getElementById("nameLabel").innerText = translations[lang].nameLabel;
+    document.getElementById("emailLabel").innerText = translations[lang].emailLabel;
+    document.getElementById("dateLabel").innerText = translations[lang].dateLabel;
+    document.getElementById("ticketTitle").innerText = translations[lang].ticketTitle;
+    document.getElementById("age1Label").innerText = translations[lang].age1;
+    document.getElementById("age2Label").innerText = translations[lang].age2;
+    document.getElementById("age3Label").innerText = translations[lang].age3;
+    document.getElementById("paymentTitle").innerText = translations[lang].paymentTitle;
+    document.getElementById("upiLabel").innerText = translations[lang].upi;
+    document.getElementById("cardLabel").innerText = translations[lang].card;
+    document.getElementById("netLabel").innerText = translations[lang].net;
+    document.getElementById("bookBtn").innerText = translations[lang].book;
+    document.getElementById("footer").innerText = translations[lang].footer;
+
+    calculate();
+  });
+});
+
+calculate();
 </script>
+
 </body>
 </html>
