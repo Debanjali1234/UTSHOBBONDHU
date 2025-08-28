@@ -36,7 +36,8 @@
             line-height: 1.6;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
             padding: 20px;
             position: relative;
@@ -121,6 +122,7 @@
             overflow: hidden;
             position: relative;
             animation: slideUp 0.8s ease-out;
+            margin-bottom: 20px;
         }
 
         .emergency-header {
@@ -303,6 +305,14 @@
             box-shadow: 0 12px 35px var(--shadow-medium);
         }
 
+        .action-btn:disabled {
+            background: #ccc !important;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            pointer-events: none;
+        }
+
         .btn-hospital {
             background: linear-gradient(135deg, #3498db, #2980b9);
         }
@@ -377,33 +387,13 @@
             }
         }
 
-        @media (max-width: 768px) {
-            .emergency-content {
-                padding: 30px 20px;
-            }
-
-            .form-section {
-                padding: 25px;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .language-switcher,
-            .back-button {
-                position: absolute;
-            }
-
-            .language-switcher {
-                top: 10px;
-                right: 10px;
-            }
-
-            .back-button {
-                top: 10px;
-                left: 10px;
-            }
+        .footer {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+            color: var(--pineapple);
+            font-size: 0.9em;
+            opacity: 0.7;
         }
 
         .loading {
@@ -417,7 +407,9 @@
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
@@ -450,7 +442,6 @@
                         <span>👤</span>
                         <span data-key="personal-info">ব্যক্তিগত তথ্য</span>
                     </h3>
-                    
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="fullName" data-key="full-name">পূর্ণ নাম <span class="required">*</span></label>
@@ -488,7 +479,6 @@
                         <span>📍</span>
                         <span data-key="location-info">অবস্থান তথ্য</span>
                     </h3>
-                    
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="currentAddress" data-key="current-address">বর্তমান ঠিকানা <span class="required">*</span></label>
@@ -508,7 +498,6 @@
                         <span>🩺</span>
                         <span data-key="medical-info">চিকিৎসা তথ্য</span>
                     </h3>
-                    
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="emergencyType" data-key="emergency-type">জরুরী অবস্থার ধরন <span class="required">*</span></label>
@@ -557,22 +546,19 @@
                 </div>
 
                 <div class="emergency-actions">
-                    <button type="button" class="action-btn btn-hospital" onclick="requestEmergencyHelp('hospital')">
+                    <button type="submit" id="submitBtn" class="action-btn btn-hospital">
                         <span>🏥</span>
                         <span data-key="hospital-btn">নিকটবর্তী হাসপাতাল</span>
                     </button>
-
-                    <button type="button" class="action-btn btn-ambulance" onclick="requestEmergencyHelp('ambulance')">
+                    <button type="submit" id="submitBtn2" class="action-btn btn-ambulance">
                         <span>🚑</span>
                         <span data-key="ambulance-btn">অ্যাম্বুলেন্স কল করুন</span>
                     </button>
-
-                    <button type="button" class="action-btn btn-police" onclick="requestEmergencyHelp('police')">
+                    <button type="submit" id="submitBtn3" class="action-btn btn-police">
                         <span>👮</span>
                         <span data-key="police-btn">পুলিশ স্টেশন</span>
                     </button>
-
-                    <button type="button" class="action-btn btn-emergency" onclick="requestEmergencyHelp('emergency')">
+                    <button type="submit" id="submitBtn4" class="action-btn btn-emergency">
                         <span>🔥</span>
                         <span data-key="fire-btn">ফায়ার সার্ভিস</span>
                     </button>
@@ -585,8 +571,11 @@
         <span data-key="sending-help">সাহায্য পাঠানো হচ্ছে...</span>
     </div>
 
+    <footer class="footer">
+        <p data-key="footer-text">© ২০২৩ সকল অধিকার সংরক্ষিত।</p>
+    </footer>
+
     <script>
-        // Language translations
         const translations = {
             bn: {
                 'back-text': 'ফিরে যান',
@@ -636,7 +625,8 @@
                 'age-required': 'বয়স প্রয়োজন',
                 'gender-required': 'লিঙ্গ নির্বাচন করুন',
                 'address-required': 'ঠিকানা প্রয়োজন',
-                'emergency-required': 'জরুরী অবস্থার ধরন নির্বাচন করুন'
+                'emergency-required': 'জরুরী অবস্থার ধরন নির্বাচন করুন',
+                'footer-text': '© ২০২৩ সকল অধিকার সংরক্ষিত।'
             },
             en: {
                 'back-text': 'Go Back',
@@ -686,7 +676,8 @@
                 'age-required': 'Age is required',
                 'gender-required': 'Select gender',
                 'address-required': 'Address is required',
-                'emergency-required': 'Select emergency type'
+                'emergency-required': 'Select emergency type',
+                'footer-text': '© 2023 All rights reserved.'
             },
             hi: {
                 'back-text': 'वापस जाएं',
@@ -736,59 +727,82 @@
                 'age-required': 'उम्र आवश्यक है',
                 'gender-required': 'लिंग चुनें',
                 'address-required': 'पता आवश्यक है',
-                'emergency-required': 'आपातकालीन प्रकार चुनें'
+                'emergency-required': 'आपातकालीन प्रकार चुनें',
+                'footer-text': '© 2023 सभी अधिकार सुरक्षित।'
             },
         };
-        // Apply translations to the page
-    function switchLanguage(lang) {
-        // Update <html lang="...">
-        document.documentElement.setAttribute("lang", lang);
 
-        // Switch text for elements with data-key
-        document.querySelectorAll("[data-key]").forEach(el => {
-            const key = el.getAttribute("data-key");
-            if (translations[lang] && translations[lang][key]) {
-                el.textContent = translations[lang][key];
+        function switchLanguage(lang) {
+            document.documentElement.setAttribute("lang", lang);
+            document.querySelectorAll("[data-key]").forEach(el => {
+                const key = el.getAttribute("data-key");
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+            document.querySelectorAll("[data-key-placeholder]").forEach(el => {
+                const key = el.getAttribute("data-key-placeholder");
+                if (translations[lang] && translations[lang][key]) {
+                    el.setAttribute("placeholder", translations[lang][key]);
+                }
+            });
+            localStorage.setItem("selectedLang", lang);
+        }
+
+        document.querySelectorAll(".lang-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                document.querySelectorAll(".lang-btn").forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                const lang = btn.getAttribute("data-lang");
+                switchLanguage(lang);
+            });
+        });
+
+        const savedLang = localStorage.getItem("selectedLang") || "bn";
+        document.querySelector(`.lang-btn[data-lang="${savedLang}"]`)?.classList.add("active");
+        switchLanguage(savedLang);
+
+        const form = document.getElementById("emergencyForm");
+        const statusIndicator = document.getElementById("statusIndicator");
+        const submitButtons = form.querySelectorAll('button[type="submit"]');
+
+        function validateForm() {
+            let isValid = true;
+            document.querySelectorAll(".validation-message").forEach(el => el.style.display = "none");
+            const requiredInputs = form.querySelectorAll("[required]");
+            requiredInputs.forEach(input => {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    const validationMessage = input.nextElementSibling;
+                    if (validationMessage && validationMessage.classList.contains("validation-message")) {
+                        validationMessage.style.display = "block";
+                    }
+                }
+            });
+            return isValid;
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (validateForm()) {
+                requestEmergencyHelp();
+            } else {
+                statusIndicator.style.display = "none";
             }
         });
 
-        // Switch placeholders for inputs/textareas
-        document.querySelectorAll("[data-key-placeholder]").forEach(el => {
-            const key = el.getAttribute("data-key-placeholder");
-            if (translations[lang] && translations[lang][key]) {
-                el.setAttribute("placeholder", translations[lang][key]);
-            }
-        });
+        function requestEmergencyHelp() {
+            statusIndicator.style.display = "block";
+            const currentLang = localStorage.getItem("selectedLang") || "bn";
+            statusIndicator.innerHTML = `<span>${translations[currentLang]["sending-help"]}</span>`;
+            
+            submitButtons.forEach(btn => btn.disabled = true);
 
-        // Save preference
-        localStorage.setItem("selectedLang", lang);
-    }
-
-    // Handle language button clicks
-    document.querySelectorAll(".lang-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-            document.querySelectorAll(".lang-btn").forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
-            const lang = btn.getAttribute("data-lang");
-            switchLanguage(lang);
-        });
-    });
-
-    // Load saved language or default
-    const savedLang = localStorage.getItem("selectedLang") || "bn";
-    document.querySelector(`.lang-btn[data-lang="${savedLang}"]`)?.classList.add("active");
-    switchLanguage(savedLang);
-
-    // Emergency help status simulation
-    function requestEmergencyHelp(type) {
-        const status = document.getElementById("statusIndicator");
-        status.style.display = "block";
-        const currentLang = localStorage.getItem("selectedLang") || "bn";
-        status.innerHTML = `<span>${translations[currentLang]["sending-help"]}</span>`;
-        setTimeout(() => {
-            status.style.display = "none";
-        }, 2000);
-    }
-</script>
+            setTimeout(() => {
+                statusIndicator.style.display = "none";
+                submitButtons.forEach(btn => btn.disabled = false);
+            }, 3000); // Increased timeout for a more realistic loading effect
+        }
+    </script>
 </body>
 </html>
