@@ -55,7 +55,8 @@ const I18N = {
     via:"Use",
     interchange:"interchange at",
     distance:"Approx. distance",
-    switches:"Line change(s)"
+    switches:"Line change(s)",
+    footNote: "Distances are approximate (station-to-station). For live schedules and traffic, please check Google Maps/Metro Authority information."
   },
   hi:{
     title:"मेट्रो रूट गाइड",
@@ -76,7 +77,8 @@ const I18N = {
     via:"उपयोग करें",
     interchange:"पर",
     distance:"अनुमानित दूरी",
-    switches:"लाइन परिवर्तन"
+    switches:"लाइन परिवर्तन",
+    footNote: "दूरी अनुमानित है (स्टेशन-से-स्टेशन)। लाइव शेड्यूल और ट्रैफिक के लिए, कृपया Google Maps/मेट्रो प्राधिकरण की जानकारी देखें।"
   },
   bn:{
     title:"মেট্রো রুট নির্দেশিকা",
@@ -97,7 +99,8 @@ const I18N = {
     via:"ব্যবহার করুন",
     interchange:"ইন্টারচেঞ্জ",
     distance:"আনুমানিক দূরত্ব",
-    switches:"লাইন পরিবর্তন"
+    switches:"লাইন পরিবর্তন",
+    footNote: "দূরত্ব আনুমানিক (স্টেশন-টু-স্টেশন)। লাইভ সময়সূচি ও ট্রাফিকের জন্য Google Maps/Metro কর্তৃপক্ষের তথ্য দেখুন।"
   }
 };
 
@@ -108,36 +111,28 @@ let currentLang = "bn";
 const $ = sel => document.querySelector(sel);
 const $$ = sel => document.querySelectorAll(sel);
 
-function setLang(lang){
+function setLang(lang) {
   currentLang = lang;
   // Move pill
   const buttons = [...$$('.lang-btn')];
-  buttons.forEach(b => b.classList.toggle('active', b.dataset.lang===lang));
-  const idx = buttons.findIndex(b => b.dataset.lang===lang);
+  buttons.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  const idx = buttons.findIndex(b => b.dataset.lang === lang);
   const pill = $('.lang-switch .pill');
   const btnW = buttons[0].offsetWidth;
-  pill.style.transform = `translateX(${idx*btnW}px)`;
+  pill.style.transform = `translateX(${idx * btnW}px)`;
 
-  // Texts
-  $('[data-i18n="title"]').textContent = I18N[lang].title;
-  $('[data-i18n="routeFinder"]').textContent = I18N[lang].routeFinder;
-  $('[data-i18n="routeFinderNote"]').textContent = I18N[lang].routeFinderNote;
-  $('[data-i18n="from"]').textContent = I18N[lang].from;
-  $('[data-i18n="to"]').textContent = I18N[lang].to;
-  $('#findBtn').textContent = I18N[lang].findRoute;
-
-  $('[data-i18n="blueLine"]').textContent = I18N[lang].blueLine;
-  $('[data-i18n="greenLine"]').textContent = I18N[lang].greenLine;
-  $('[data-i18n="timetableNote"]').textContent = I18N[lang].timetableNote;
-  $('[data-i18n="moreLines"]').textContent = I18N[lang].moreLines;
-  $('[data-i18n="mapTitle"]').textContent = I18N[lang].mapTitle;
-  $('[data-i18n="mapNote"]').textContent = I18N[lang].mapNote;
-  $('[data-i18n="openInMaps"]').textContent = I18N[lang].openInMaps;
+  // Update all elements with a data-i18n attribute
+  $$('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (I18N[lang][key]) {
+      el.innerHTML = I18N[lang][key];
+    }
+  });
 
   // table headers
-  const keys = ["thNo","thStation","thOpening","thConn","thLayout","thPlat"];
+  const keys = ["thNo", "thStation", "thOpening", "thConn", "thLayout", "thPlat"];
   const ths = $$("#timetable thead th");
-  keys.forEach((k,i)=> ths[i].textContent = I18N[lang][k]);
+  keys.forEach((k, i) => ths[i].textContent = I18N[lang][k]);
 
   // refresh table for active tab
   const activeTab = $('.tab.active').dataset.line;
