@@ -3,997 +3,557 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>স্বেচ্ছাসেবক হোন - Volunteer Registration</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&family=Inter:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Volunteer Registration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --pineapple: #74685E;
-            --apricot: #E47A24;
-            --dark-mango: #C8702A;
-            --blood-orange: #BF2020;
-            --candy-apple: #951421;
-            --background-light: #FEFCF8;
-            --background-medium: #F7F3EE;
-            --text-dark: #2C2824;
-            --text-light: #FFFFFF;
-            --shadow-light: rgba(116, 104, 94, 0.1);
-            --shadow-medium: rgba(116, 104, 94, 0.2);
-            --shadow-heavy: rgba(116, 104, 94, 0.3);
-            --gradient-warm: linear-gradient(135deg, var(--apricot), var(--dark-mango));
-            --gradient-professional: linear-gradient(135deg, var(--pineapple), var(--apricot));
-            --gradient-accent: linear-gradient(135deg, var(--blood-orange), var(--candy-apple));
-        }
+        /* CSS will go here */
+        
+    /* New CSS Variables based on the requested style */
+    :root {
+        --header-background: linear-gradient(to right, #c7672e, #FC9E29); /* Orange-to-peach gradient for the header bar */
+        --header-footer-color: #E62235; /* Vibrant Red for the footer */
+        --header-text-color: #ffffff; /* White text for the header */
+        --main-background: #fdfaf7; /* Light off-white background with a hint of warmth */
+        --card-background: #ffffff;
+        --text-color: #2c3e50;
+        --light-text-color: #7f8c8d;
+        --border-color: #ecf0f1;
+        --button-gradient: linear-gradient(135deg, #ac6625, #F74D28); /* Orange button gradient */
+        --language-box-bg: #5D5451; /* Muted dark gray for language selector */
+        --focus-shadow: rgba(58, 110, 165, 0.2);
+        --transition-speed: 0.3s;
+        --font-family: 'Noto Sans Bengali', 'Lato', sans-serif; /* Prioritize Bengali font */
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    /* Base Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: var(--font-family);
+    }
 
-        body {
-            font-family: 'Noto Sans Bengali', 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--background-light) 0%, var(--background-medium) 100%);
-            color: var(--text-dark);
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            position: relative;
-        }
+    body {
+        background: var(--main-background);
+        color: var(--text-color);
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column; /* Allows header, main content, and footer to stack */
+    }
 
-        body.english {
-            font-family: 'Inter', 'Noto Sans Bengali', sans-serif;
-        }
+    /* Header Section */
+    .header-section {
+        background: var(--header-background); /* Orange Gradient */
+        padding: 15px 20px;
+        color: var(--header-text-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        flex-shrink: 0; /* Prevent header from shrinking */
+    }
 
-        body.hindi {
-            font-family: 'Noto Sans Devanagari', 'Inter', sans-serif;
-        }
+    .back-button {
+    background-image: var(--button-gradient);
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none; /* Removes the underline from the link */
+    white-space: nowrap; /* Prevents text from wrapping */
+}
 
-        .language-switcher {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: var(--gradient-professional);
-            border-radius: 50px;
-            padding: 8px;
-            box-shadow: 0 8px 25px var(--shadow-medium);
-            backdrop-filter: blur(10px);
-        }
+.back-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
 
-        .language-switcher button {
-            background: transparent;
-            border: none;
-            color: var(--text-light);
-            padding: 10px 16px;
-            margin: 0 2px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9em;
-            transition: all 0.3s ease;
-        }
+/* Make sure the existing .back-btn doesn't interfere if it's still in use */
+.back-btn {
+    background-image: var(--button-gradient);
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    white-space: nowrap;
+}
 
-        .language-switcher button:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
+.back-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
 
-        .language-switcher button.active {
-            background: var(--text-light);
-            color: var(--apricot);
-            box-shadow: 0 4px 15px var(--shadow-light);
-        }
+/* ... (Rest of your CSS) ... */
 
-        .back-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-            background: var(--gradient-professional);
-            color: var(--text-light);
-            border: none;
-            padding: 12px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 8px 25px var(--shadow-medium);
-            transition: all 0.3s ease;
-        }
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .header-section {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+    }
+    .back-btn, .back-button, .language-selector-container {
+        width: 100%;
+        justify-content: center;
+    }
+    .language-selector-container .lang-btn {
+        flex-grow: 1;
+    }
+    .main-content {
+        padding: 20px 15px;
+    }
+    .container {
+        padding: 30px 20px;
+    }
+    .header h1 {
+        font-size: 1.8rem;
+    }
+    .live-updates span {
+        font-size: 1.2rem;
+    }
+}
 
-        .back-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 35px var(--shadow-medium);
-        }
+    .live-updates {
+        display: flex;
+        align-items: center;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #fff; /* White text on orange header */
+    }
 
-        .volunteer-form {
-            max-width: 900px;
-            width: 100%;
-            background: var(--text-light);
-            border-radius: 25px;
-            box-shadow: 0 20px 60px var(--shadow-medium);
-            overflow: hidden;
-            position: relative;
-            animation: slideUp 0.8s ease-out;
-        }
+    .language-selector-container {
+        display: flex;
+        background-color: var(--language-box-bg); /* Muted dark gray */
+        border-radius: 50px;
+        padding: 5px;
+    }
 
-        .form-header {
-            background: var(--gradient-professional);
-            color: var(--text-light);
-            padding: 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+    .language-selector-container .lang-btn {
+        background: transparent;
+        border: none;
+        color: #fff;
+        padding: 8px 18px;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        white-space: nowrap; /* Prevent language names from wrapping */
+    }
 
-        .form-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="volunteer-pattern" patternUnits="userSpaceOnUse" width="50" height="50"><circle cx="25" cy="25" r="1.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23volunteer-pattern)"/></svg>');
-            opacity: 0.3;
-        }
+    .language-selector-container .lang-btn.active {
+        background: var(--button-gradient); /* Orange gradient for active state */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
 
-        .volunteer-badge {
-            display: inline-flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            padding: 15px 25px;
-            border-radius: 50px;
-            margin-bottom: 20px;
-            animation: float 3s ease-in-out infinite;
-            position: relative;
-            z-index: 2;
-        }
+    /* Main Content Area */
+    .main-content {
+        flex-grow: 1; /* Allows main content to take up available space */
+        display: flex;
+        justify-content: center;
+        align-items: flex-start; /* Align to top, not center */
+        padding: 40px 20px; /* Add padding to the top/bottom of the content */
+    }
 
-        .volunteer-icon {
-            font-size: 1.8rem;
-            margin-right: 10px;
-            color: var(--text-light);
-        }
+    /* Form Container */
+    .container {
+        width: 100%;
+        max-width: 550px;
+        background: var(--card-background);
+        padding: 50px 40px;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        animation: fadeIn 0.8s ease-out;
+    }
 
-        .form-title {
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 700;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            position: relative;
-            z-index: 2;
-        }
-
-        .form-subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            position: relative;
-            z-index: 2;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .form-content {
-            padding: 50px 40px;
-        }
-
-        .benefits-section {
-            background: linear-gradient(135deg, var(--background-light), var(--background-medium));
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 40px;
-            border-left: 5px solid var(--apricot);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .benefits-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle, rgba(228, 122, 36, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-        }
-
-        .benefits-title {
-            color: var(--pineapple);
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .benefits-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            list-style: none;
-            padding: 0;
-        }
-
-        .benefits-list li {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px;
-            background: var(--text-light);
-            border-radius: 12px;
-            box-shadow: 0 4px 15px var(--shadow-light);
-            transition: transform 0.3s ease;
-        }
-
-        .benefits-list li:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px var(--shadow-medium);
-        }
-
-        .benefits-list li::before {
-            content: '✨';
-            font-size: 1.2rem;
-            color: var(--apricot);
-        }
-
-        .form-section {
-            background: var(--background-light);
-            border-radius: 20px;
-            padding: 35px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(116, 104, 94, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .form-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-warm);
-        }
-
-        .section-title {
-            color: var(--pineapple);
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--text-dark);
-            font-size: 1rem;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid rgba(116, 104, 94, 0.2);
-            border-radius: 12px;
-            font-size: 1rem;
-            background: var(--text-light);
-            color: var(--text-dark);
-            transition: all 0.3s ease;
-            font-family: inherit;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            border-color: var(--apricot);
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(228, 122, 36, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .checkbox-group {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-top: 10px;
-        }
-
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            background: var(--text-light);
-            border-radius: 12px;
-            border: 2px solid rgba(116, 104, 94, 0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .checkbox-item:hover {
-            border-color: var(--apricot);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px var(--shadow-light);
-        }
-
-        .checkbox-item input[type="checkbox"] {
-            width: auto;
-            margin-right: 12px;
-            accent-color: var(--apricot);
-            transform: scale(1.2);
-        }
-
-        .checkbox-item label {
-            margin-bottom: 0;
-            cursor: pointer;
-            flex: 1;
-        }
-
-        .file-upload {
-            position: relative;
-            display: inline-block;
-            width: 100%;
-        }
-
-        .file-upload input[type="file"] {
-            position: absolute;
+    @keyframes fadeIn {
+        from {
             opacity: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
+            transform: translateY(20px);
         }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 
-        .file-upload-label {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    /* Form Header */
+    .header {
+        text-align: center;
+        margin-bottom: 35px;
+    }
+
+    .header h1 {
+        font-size: 2.2rem;
+        margin-bottom: 8px;
+        color: var(--text-color); /* Use dark text color for form header */
+        font-weight: 700;
+    }
+
+    .header p {
+        font-size: 1rem;
+        color: var(--light-text-color);
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    /* Form Elements */
+    form {
+        display: grid;
+        gap: 25px;
+    }
+
+    .form-group {
+        position: relative;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+
+    input, textarea, select {
+        width: 100%;
+        padding: 15px 20px;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        font-size: 1rem;
+        color: var(--text-color);
+        background-color: #FDFDFD;
+        transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    }
+
+    input:focus, textarea:focus, select:focus {
+        border-color: var(--button-gradient); /* Use a dominant color for focus border */
+        box-shadow: 0 0 0 3px rgba(255, 123, 0, 0.2); /* Orange shadow for focus */
+        outline: none;
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+    
+    /* Submit Button */
+    .submit-btn {
+        background-image: var(--button-gradient); /* Orange gradient */
+        color: #fff;
+        padding: 16px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color var(--transition-speed) ease, transform 0.2s ease, box-shadow var(--transition-speed) ease;
+        box-shadow: 0 6px 15px rgba(255, 123, 0, 0.25); /* Orange shadow */
+    }
+
+    .submit-btn:hover {
+        opacity: 0.9; /* Slightly dim on hover */
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(255, 123, 0, 0.35);
+    }
+
+    .submit-btn:active {
+        transform: translateY(0);
+        box-shadow: 0 4px 10px rgba(255, 123, 0, 0.2);
+    }
+
+    /* Form Footer (within the card) */
+    .form-footer {
+        margin-top: 35px;
+        text-align: center;
+        font-size: 0.8rem;
+        color: var(--light-text-color);
+        opacity: 0.8;
+    }
+
+    /* Main Page Footer Section */
+    .footer-section {
+        background-color: var(--header-footer-color); /* Vibrant Red */
+        padding: 20px;
+        color: #fff;
+        text-align: center;
+        font-size: 0.9rem;
+        flex-shrink: 0; /* Prevent footer from shrinking */
+    }
+
+    .footer-section a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 5px;
+        transition: text-decoration var(--transition-speed) ease;
+    }
+
+    .footer-section a:hover {
+        text-decoration: underline;
+    }
+
+    /* Responsive design for smaller screens */
+    @media (max-width: 768px) {
+        .header-section {
+            flex-direction: column;
             gap: 10px;
-            padding: 20px;
-            border: 2px dashed var(--apricot);
-            border-radius: 12px;
-            background: var(--background-light);
-            color: var(--pineapple);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
+            padding: 15px;
         }
-
-        .file-upload-label:hover {
-            background: rgba(228, 122, 36, 0.1);
-            transform: translateY(-2px);
+        .back-btn, .language-selector-container {
+            width: 100%;
+            justify-content: center;
         }
+        .language-selector-container .lang-btn {
+            flex-grow: 1;
+        }
+        .main-content {
+            padding: 20px 15px;
+        }
+        .container {
+            padding: 30px 20px;
+        }
+        .header h1 {
+            font-size: 1.8rem;
+        }
+        .live-updates span {
+            font-size: 1.2rem;
+        }
+    }
 
-        .file-upload-icon {
+    @media (max-width: 480px) {
+        .container {
+            padding: 20px 15px;
+        }
+        .header h1 {
             font-size: 1.5rem;
         }
-
-        .consent-section {
-            background: linear-gradient(135deg, var(--background-light), rgba(228, 122, 36, 0.05));
-            border-radius: 20px;
-            padding: 25px;
-            margin: 30px 0;
-            border: 2px solid rgba(228, 122, 36, 0.2);
+        .live-updates span {
+            font-size: 1rem;
         }
-
-        .consent-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            margin-bottom: 15px;
+        input, textarea, select, .submit-btn {
+            padding: 12px 15px;
+            font-size: 0.9rem;
         }
-
-        .consent-item input[type="checkbox"] {
-            margin-top: 3px;
-            accent-color: var(--apricot);
-            transform: scale(1.3);
+        label {
+            font-size: 0.9rem;
         }
-
-        .consent-item label {
-            color: var(--text-dark);
-            font-size: 0.95rem;
-            line-height: 1.5;
-            cursor: pointer;
+        .language-selector-container .lang-btn {
+            padding: 6px 12px;
+            font-size: 0.85rem;
         }
-
-        .submit-btn {
-            width: 100%;
-            background: var(--gradient-warm);
-            color: var(--text-light);
-            border: none;
-            padding: 20px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 30px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 25px var(--shadow-light);
-        }
-
-        .submit-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            transition: left 0.4s ease;
-        }
-
-        .submit-btn:hover::before {
-            left: 0;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px var(--shadow-medium);
-        }
-
-        .submit-btn:disabled {
-            background: var(--shadow-medium);
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .required {
-            color: var(--blood-orange);
-        }
-
-        .success-message {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--text-light);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px var(--shadow-heavy);
-            z-index: 2000;
-            text-align: center;
-            max-width: 500px;
-            width: 90%;
-            display: none;
-        }
-
-        .success-icon {
-            font-size: 3rem;
-            color: var(--apricot);
-            margin-bottom: 20px;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .form-content {
-                padding: 30px 20px;
-            }
-
-            .form-section {
-                padding: 25px;
-            }
-
-            .form-grid,
-            .checkbox-group,
-            .benefits-list {
-                grid-template-columns: 1fr;
-            }
-
-            .language-switcher,
-            .back-button {
-                position: absolute;
-            }
-
-            .language-switcher {
-                top: 10px;
-                right: 10px;
-                padding: 6px;
-            }
-
-            .back-button {
-                top: 10px;
-                left: 10px;
-                padding: 10px 16px;
-            }
-
-            .form-header {
-                padding: 30px 20px;
-            }
-        }
-
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: var(--text-light);
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+    }
+</style>
     </style>
 </head>
 <body>
-    <div class="language-switcher">
-        <button class="lang-btn active" data-lang="bn">বাং</button>
-        <button class="lang-btn" data-lang="en">ENG</button>
-        <button class="lang-btn" data-lang="hi">हिं</button>
+    <header class="header-section">
+        <a href="index.html" class="back-button">
+            <span>←</span>
+            <span data-key="backBtn">Go Back</span>
+        </a>
+        <div class="live-updates">
+            <span data-key="live-updates">Live Updates - Check Now</span>
+        </div>
+        <div class="language-selector-container">
+            <button class="lang-btn active" data-lang="bn">বাংলা</button>
+            <button class="lang-btn" data-lang="en">English</button>
+            <button class="lang-btn" data-lang="hi">हिन्दी</button>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="header">
+                <h1 data-key="form-title">স্বেচ্ছাসেবক নিবন্ধন ফর্ম</h1>
+                <p data-key="form-subtitle">আমাদের সঙ্গে যোগ দিন, সমাজসেবায় অবদান রাখুন।</p>
+            </div>
+
+            <form>
+                <div class="form-group">
+                    <label data-key="name-label" for="name">নাম</label>
+                    <input type="text" id="name" data-key-placeholder="name-placeholder" placeholder="আপনার নাম লিখুন" required>
+                </div>
+
+                <div class="form-group">
+                    <label data-key="email-label" for="email">ইমেইল</label>
+                    <input type="email" id="email" data-key-placeholder="email-placeholder" placeholder="আপনার ইমেইল লিখুন" required>
+                </div>
+
+                <div class="form-group">
+                    <label data-key="phone-label" for="phone">মোবাইল নম্বর</label>
+                    <input type="tel" id="phone" data-key-placeholder="phone-placeholder" placeholder="আপনার ফোন নম্বর লিখুন" required>
+                </div>
+
+                <div class="form-group">
+                    <label data-key="interest-label" for="interest">কোন ক্ষেত্রে কাজ করতে চান?</label>
+                    <select id="interest" required>
+                        <option value="" disabled selected data-key="option-default">একটি ক্ষেত্র নির্বাচন করুন</option>
+                        <option value="education" data-key="option-education">শিক্ষা</option>
+                        <option value="health" data-key="option-health">স্বাস্থ্য</option>
+                        <option value="environment" data-key="option-environment">পরিবেশ</option>
+                        <option value="other" data-key="option-other">অন্যান্য</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label data-key="message-label" for="message">বার্তা</label>
+                    <textarea id="message" data-key-placeholder="message-placeholder" placeholder="সংক্ষেপে লিখুন কেন যোগ দিতে চান..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="submit-btn" data-key="submit-btn">জমা দিন</button>
+                </div>
+            </form>
+
+            <div class="form-footer">
+                <p data-key="footer-text">© 2025 স্বেচ্ছাসেবক নেটওয়ার্ক</p>
+            </div>
+        </div>
     </div>
 
-    <a href="index.html" class="back-button" data-key="back-btn">
-        <span>←</span>
-        <span data-key="back-text">ফিরে যান</span>
-    </a>
+    <footer class="footer-section">
+        <p>© 2025 Pujasathi | <span data-key="pujasathi-tagline">যা আয়োজন কলিং সামনে, আনন্দে ভরে প্রতিটি অন্তর</span> | <a href="#" data-key="privacy-policy">Privacy Policy</a> | <a href="#" data-key="terms-service">Terms of Service</a></p>
+    </footer>
 
-    <form class="volunteer-form" id="volunteerForm" novalidate>
-        <div class="form-header">
-            <div class="volunteer-badge">
-                <span class="volunteer-icon">👥</span>
-                <span data-key="volunteer-badge">VOLUNTEER</span>
-            </div>
-            <h1 class="form-title" data-key="form-title">স্বেচ্ছাসেবক হোন</h1>
-            <p class="form-subtitle" data-key="form-subtitle">আমাদের সম্প্রদায়ের সেবায় যোগ দিন এবং একসাথে ইতিবাচক পরিবর্তন আনুন</p>
-        </div>
+    <script>
+        const translations = {
+            bn: {
+                'go-back': 'ফিরে যাও',
+                'live-updates': 'লাইভ আপডেট - এখন দেখুন',
+                'form-title': 'স্বেচ্ছাসেবক নিবন্ধন ফর্ম',
+                'form-subtitle': 'আমাদের সঙ্গে যোগ দিন, সমাজসেবায় অবদান রাখুন।',
+                'name-label': 'নাম',
+                'email-label': 'ইমেইল',
+                'phone-label': 'মোবাইল নম্বর',
+                'interest-label': 'কোন ক্ষেত্রে কাজ করতে চান?',
+                'option-default': 'একটি ক্ষেত্র নির্বাচন করুন',
+                'option-education': 'শিক্ষা',
+                'option-health': 'স্বাস্থ্য',
+                'option-environment': 'পরিবেশ',
+                'option-other': 'অন্যান্য',
+                'message-label': 'বার্তা',
+                'submit-btn': 'জমা দিন',
+                'form-footer-text': '© 2025 স্বেচ্ছাসেবক নেটওয়ার্ক', // Changed key to differentiate from main footer
+                'name-placeholder': 'আপনার নাম লিখুন',
+                'email-placeholder': 'আপনার ইমেইল লিখুন',
+                'phone-placeholder': 'আপনার ফোন নম্বর লিখুন',
+                'message-placeholder': 'সংক্ষেপে লিখুন কেন যোগ দিতে চান...',
+                'pujasathi-tagline': 'যা আয়োজন কলিং সামনে, আনন্দে ভরে প্রতিটি অন্তর',
+                'privacy-policy': 'গোপনীয়তা নীতি',
+                'terms-service': 'পরিষেবার শর্তাবলী'
+            },
+            en: {
+                'go-back': 'Go Back',
+                'live-updates': 'Live Updates - Check Now',
+                'form-title': 'Volunteer Registration Form',
+                'form-subtitle': 'Join us and contribute to social service.',
+                'name-label': 'Name',
+                'email-label': 'Email',
+                'phone-label': 'Phone Number',
+                'interest-label': 'Area of Interest',
+                'option-default': 'Select an area',
+                'option-education': 'Education',
+                'option-health': 'Health',
+                'option-environment': 'Environment',
+                'option-other': 'Other',
+                'message-label': 'Message',
+                'submit-btn': 'Submit',
+                'form-footer-text': '© 2025 Volunteer Network',
+                'name-placeholder': 'Enter your name',
+                'email-placeholder': 'Enter your email',
+                'phone-placeholder': 'Enter your phone number',
+                'message-placeholder': 'Briefly explain why you want to join...',
+                'pujasathi-tagline': 'Organizing calls, joy fills every heart',
+                'privacy-policy': 'Privacy Policy',
+                'terms-service': 'Terms of Service'
+            },
+            hi: {
+                'go-back': 'वापस जाएं',
+                'live-updates': 'लाइव अपडेट - अभी देखें',
+                'form-title': 'स्वयंसेवक पंजीकरण फॉर्म',
+                'form-subtitle': 'हमसे जुड़ें और समाज सेवा में योगदान दें।',
+                'name-label': 'नाम',
+                'email-label': 'ईमेल',
+                'phone-label': 'मोबाइल नंबर',
+                'interest-label': 'किस क्षेत्र में काम करना चाहते हैं?',
+                'option-default': 'एक क्षेत्र का चयन करें',
+                'option-education': 'शिक्षा',
+                'option-health': 'स्वास्थ्य',
+                'option-environment': 'पर्यावरण',
+                'option-other': 'अन्य',
+                'message-label': 'संदेश',
+                'submit-btn': 'जमा करें',
+                'form-footer-text': '© 2025 स्वयंसेवक नेटवर्क',
+                'name-placeholder': 'अपना नाम दर्ज करें',
+                'email-placeholder': 'अपना ईमेल दर्ज करें',
+                'phone-placeholder': 'अपना फ़ोन नंबर दर्ज करें',
+                'message-placeholder': 'संक्षेप में लिखें कि आप क्यों जुड़ना चाहते हैं...',
+                'pujasathi-tagline': 'आयोजन पुकारता है, हर दिल में खुशी भरता है',
+                'privacy-policy': 'गोपनीयता नीति',
+                'terms-service': 'सेवा की शर्तें'
+            }
+        };
 
-        <div class="form-content">
-            <div class="benefits-section">
-                <h3 class="benefits-title">
-                    <span>🌟</span>
-                    <span data-key="benefits-title">স্বেচ্ছাসেবকের সুবিধা</span>
-                </h3>
-                <ul class="benefits-list">
-                    <li data-key="benefit-1">সম্প্রদায়ের সেবা করার সুযোগ</li>
-                    <li data-key="benefit-2">নতুন মানুষের সাথে নেটওয়ার্কিং</li>
-                    <li data-key="benefit-3">নেতৃত্ব ও দক্ষতা বিকাশ</li>
-                    <li data-key="benefit-4">সার্টিফিকেট ও স্বীকৃতি</li>
-                    <li data-key="benefit-5">বিনামূল্যে খাবার ও রিফ্রেশমেন্ট</li>
-                    <li data-key="benefit-6">মূল্যবান কর্মঅভিজ্ঞতা</li>
-                </ul>
-            </div>
+        const langButtons = document.querySelectorAll('.language-selector-container .lang-btn');
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelector('.language-selector-container .lang-btn.active').classList.remove('active');
+                btn.classList.add('active');
+                const lang = btn.dataset.lang;
 
-            <div class="form-section">
-                <h3 class="section-title">
-                    <span>👤</span>
-                    <span data-key="personal-info">ব্যক্তিগত তথ্য</span>
-                </h3>
-                
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="fullName" data-key="full-name">পূর্ণ নাম <span class="required">*</span></label>
-                        <input type="text" id="fullName" name="fullName" data-key-placeholder="name-placeholder" placeholder="আপনার পূর্ণ নাম লিখুন" required>
-                    </div>
+                document.querySelectorAll('[data-key]').forEach(el => {
+                    const key = el.getAttribute('data-key');
+                    if (translations[lang][key]) {
+                        el.textContent = translations[lang][key];
+                    }
+                });
 
-                    <div class="form-group">
-                        <label for="phoneNumber" data-key="phone-number">মোবাইল নম্বর <span class="required">*</span></label>
-                        <input type="tel" id="phoneNumber" name="phoneNumber" data-key-placeholder="phone-placeholder" placeholder="+৮৮০১XXXXXXXXX" required>
-                    </div>
+                document.querySelectorAll('[data-key-placeholder]').forEach(el => {
+                    const key = el.getAttribute('data-key-placeholder');
+                    if (translations[lang][key]) {
+                        el.setAttribute('placeholder', translations[lang][key]);
+                    }
+                });
 
-                    <div class="form-group">
-                        <label for="email" data-key="email">ইমেল ঠিকানা <span class="required">*</span></label>
-                        <input type="email" id="email" name="email" data-key-placeholder="email-placeholder" placeholder="আপনার ইমেল ঠিকানা লিখুন" required>
-                    </div>
+                // Update select option for "default"
+                const defaultOption = document.querySelector('select#interest option[data-key="option-default"]');
+                if (defaultOption) {
+                    defaultOption.textContent = translations[lang]['option-default'];
+                }
 
-                    <div class="form-group">
-                        <label for="age" data-key="age">বয়স <span class="required">*</span></label>
-                        <input type="number" id="age" name="age" min="16" max="80" data-key-placeholder="age-placeholder" placeholder="আপনার বয়স" required>
-                    </div>
+                // Update anchor tags in footer
+                const privacyPolicyLink = document.querySelector('.footer-section a[data-key="privacy-policy"]');
+                if (privacyPolicyLink) {
+                    privacyPolicyLink.textContent = translations[lang]['privacy-policy'];
+                }
+                const termsServiceLink = document.querySelector('.footer-section a[data-key="terms-service"]');
+                if (termsServiceLink) {
+                    termsServiceLink.textContent = translations[lang]['terms-service'];
+                }
+            });
+        });
 
-                    <div class="form-group">
-                        <label for="address" data-key="address">ঠিকানা <span class="required">*</span></label>
-                        <textarea id="address" name="address" data-key-placeholder="address-placeholder" placeholder="আপনার সম্পূর্ণ ঠিকানা লিখুন" required></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="occupation" data-key="occupation">পেশা</label>
-                        <input type="text" id="occupation" name="occupation" data-key-placeholder="occupation-placeholder" placeholder="আপনার পেশা লিখুন">
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-section">
-                <h3 class="section-title">
-                    <span>📅</span>
-                    <span data-key="availability-title">উপস্থিতি ও দক্ষতা</span>
-                </h3>
-
-                <div class="form-group">
-                    <label data-key="availability-label">আপনার উপস্থিতির দিনগুলি নির্বাচন করুন <span class="required">*</span></label>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="day1" name="availability" value="day1" required>
-                            <label for="day1" data-key="day-1">পূজার প্রথম দিন</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="day2" name="availability" value="day2">
-                            <label for="day2" data-key="day-2">পূজার দ্বিতীয় দিন</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="day3" name="availability" value="day3">
-                            <label for="day3" data-key="day-3">পূজার তৃতীয় দিন</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="day4" name="availability" value="day4">
-                            <label for="day4" data-key="day-4">পূজার চতুর্থ দিন</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="all-days" name="availability" value="all">
-                            <label for="all-days" data-key="all-days">সব দিন</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="skills" data-key="skills">বিশেষ দক্ষতা</label>
-                        <select id="skills" name="skills">
-                            <option value="" data-key="select-skill">আপনার দক্ষতা নির্বাচন করুন</option>
-                            <option value="medical" data-key="medical-skill">চিকিৎসা সেবা</option>
-                            <option value="crowd_management" data-key="crowd-skill">জনতা নিয়ন্ত্রণ</option>
-                            <option value="technical" data-key="technical-skill">প্রযুক্তিগত সহায়তা</option>
-                            <option value="cooking" data-key="cooking-skill">রান্না ও পরিবেশনা</option>
-                            <option value="decoration" data-key="decoration-skill">সাজসজ্জা</option>
-                            <option value="security" data-key="security-skill">নিরাপত্তা</option>
-                            <option value="photography" data-key="photography-skill">ফটোগ্রাফি/ভিডিওগ্রাফি</option>
-                            <option value="other" data-key="other-skill">অন্যান্য</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="timeSlot" data-key="time-slot">পছন্দের সময়</label>
-                        <select id="timeSlot" name="timeSlot">
-                            <option value="" data-key="select-time">সময় নির্বাচন করুন</option>
-                            <option value="morning" data-key="morning">সকাল (৮:০০ - ১২:০০)</option>
-                            <option value="afternoon" data-key="afternoon">দুপুর (১২:০০ - ১৬:০০)</option>
-                            <option value="evening" data-key="evening">সন্ধ্যা (১৬:০০ - ২০:০০)</option>
-                            <option value="night" data-key="night">রাত (২০:০০ - ২৪:০০)</option>
-                            <option value="flexible" data-key="flexible">যেকোনো সময়</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="previousExperience" data-key="previous-experience">পূর্ববর্তী অভিজ্ঞতা</label>
-                    <textarea id="previousExperience" name="previousExperience" data-key-placeholder="experience-placeholder" placeholder="আপনার পূর্ববর্তী স্বেচ্ছাসেবক অভিজ্ঞতা সম্পর্কে বিস্তারিত লিখুন (যদি থাকে)"></textarea>
-                </div>
-            </div>
-
-            <div class="form-section">
-                <h3 class="section-title">
-                    <span>📄</span>
-                    <span data-key="documents-title">ডকুমেন্ট আপলোড</span>
-                </h3>
-
-                <div class="form-group">
-                    <label data-key="resume-label">রেজুমে/সিভি আপলোড করুন (ঐচ্ছিক)</label>
-                    <div class="file-upload">
-                        <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx">
-                        <label for="resume" class="file-upload-label">
-                            <span class="file-upload-icon">📎</span>
-                            <span data-key="file-upload-text">ফাইল নির্বাচন করুন</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="consent-section">
-                <div class="consent-item">
-                    <input type="checkbox" id="terms" name="terms" required>
-                    <label for="terms" data-key="terms-text">আমি নিশ্চিত করছি যে উপরে প্রদত্ত সকল তথ্য সত্য ও সঠিক এবং আমি স্বেচ্ছায় স্বেচ্ছাসেবক হিসেবে কাজ করতে ইচ্ছুক।</label>
-                </div>
-                <div class="consent-item">
-                    <input type="checkbox" id="commitment" name="commitment" required>
-                    <label for="commitment" data-key="commitment-text">আমি প্রতিশ্রুতি দিচ্ছি যে নির্ধারিত সময়ে উপস্থিত থাকব এবং আমার দায়িত্ব পালন করব।</label>
-                </div>
-                <div class="consent-item">
-                    <input type="checkbox" id="dataConsent" name="dataConsent" required>
-                    <label for="dataConsent" data-key="data-consent-text">আমি সম্মত যে আমার তথ্য শুধুমাত্র স্বেচ্ছাসেবক কার্যক্রমের জন্য ব্যবহৃত হবে এবং তৃতীয় পক্ষের সাথে শেয়ার করা হবে না।</label>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <button type="submit" class="cta-button">জমা দিন</button>
-            </div>
-        </div>
-
-        <script>
-// Language translations
-// (reuse the translations object from your main site, extend with form keys)
-const translations = {
-  bn: {
-    'back-text': 'ফিরে যান',
-    'volunteer-badge': 'স্বেচ্ছাসেবক',
-    'form-title': 'স্বেচ্ছাসেবক হোন',
-    'form-subtitle': 'আমাদের সম্প্রদায়ের সেবায় যোগ দিন এবং একসাথে ইতিবাচক পরিবর্তন আনুন',
-    'benefits-title': 'স্বেচ্ছাসেবকের সুবিধা',
-    'benefit-1': 'সম্প্রদায়ের সেবা করার সুযোগ',
-    'benefit-2': 'নতুন মানুষের সাথে নেটওয়ার্কিং',
-    'benefit-3': 'নেতৃত্ব ও দক্ষতা বিকাশ',
-    'benefit-4': 'সার্টিফিকেট ও স্বীকৃতি',
-    'benefit-5': 'বিনামূল্যে খাবার ও রিফ্রেশমেন্ট',
-    'benefit-6': 'মূল্যবান কর্মঅভিজ্ঞতা',
-    'personal-info': 'ব্যক্তিগত তথ্য',
-    'full-name': 'পূর্ণ নাম',
-    'name-placeholder': 'আপনার পূর্ণ নাম লিখুন',
-    'phone-number': 'মোবাইল নম্বর',
-    'phone-placeholder': '+৮৮০১XXXXXXXXX',
-    'email': 'ইমেল ঠিকানা',
-    'email-placeholder': 'আপনার ইমেল ঠিকানা লিখুন',
-    'age': 'বয়স',
-    'age-placeholder': 'আপনার বয়স',
-    'address': 'ঠিকানা',
-    'address-placeholder': 'আপনার সম্পূর্ণ ঠিকানা লিখুন',
-    'occupation': 'পেশা',
-    'occupation-placeholder': 'আপনার পেশা লিখুন',
-    'availability-title': 'উপস্থিতি ও দক্ষতা',
-    'availability-label': 'আপনার উপস্থিতির দিনগুলি নির্বাচন করুন',
-    'day-1': 'পূজার প্রথম দিন',
-    'day-2': 'পূজার দ্বিতীয় দিন',
-    'day-3': 'পূজার তৃতীয় দিন',
-    'day-4': 'পূজার চতুর্থ দিন',
-    'all-days': 'সব দিন',
-    'skills': 'বিশেষ দক্ষতা',
-    'select-skill': 'আপনার দক্ষতা নির্বাচন করুন',
-    'medical-skill': 'চিকিৎসা সেবা',
-    'crowd-skill': 'জনতা নিয়ন্ত্রণ',
-    'technical-skill': 'প্রযুক্তিগত সহায়তা',
-    'cooking-skill': 'রান্না ও পরিবেশনা',
-    'decoration-skill': 'সাজসজ্জা',
-    'security-skill': 'নিরাপত্তা',
-    'photography-skill': 'ফটোগ্রাফি/ভিডিওগ্রাফি',
-    'other-skill': 'অন্যান্য',
-    'time-slot': 'পছন্দের সময়',
-    'select-time': 'সময় নির্বাচন করুন',
-    'morning': 'সকাল (৮:০০ - ১২:০০)',
-    'afternoon': 'দুপুর (১২:০০ - ১৬:০০)',
-    'evening': 'সন্ধ্যা (১৬:০০ - ২০:০০)',
-    'night': 'রাত (২০:০০ - ২৪:০০)',
-    'flexible': 'যেকোনো সময়',
-    'previous-experience': 'পূর্ববর্তী অভিজ্ঞতা',
-    'experience-placeholder': 'আপনার পূর্ববর্তী স্বেচ্ছাসেবক অভিজ্ঞতা সম্পর্কে বিস্তারিত লিখুন (যদি থাকে)',
-    'documents-title': 'ডকুমেন্ট আপলোড',
-    'resume-label': 'রেজুমে/সিভি আপলোড করুন (ঐচ্ছিক)',
-    'file-upload-text': 'ফাইল নির্বাচন করুন',
-    'terms-text': 'আমি নিশ্চিত করছি যে উপরে প্রদত্ত সকল তথ্য সত্য ও সঠিক এবং আমি স্বেচ্ছায় স্বেচ্ছাসেবক হিসেবে কাজ করতে ইচ্ছুক।',
-    'commitment-text': 'আমি প্রতিশ্রুতি দিচ্ছি যে নির্ধারিত সময়ে উপস্থিত থাকব এবং আমার দায়িত্ব পালন করব।',
-    'data-consent-text': 'আমি সম্মত যে আমার তথ্য শুধুমাত্র স্বেচ্ছাসেবক কার্যক্রমের জন্য ব্যবহৃত হবে এবং তৃতীয় পক্ষের সাথে শেয়ার করা হবে না।',
-    'submit-btn': 'জমা দিন'
-  },
-  en: {
-    'back-text': 'Back',
-    'volunteer-badge': 'VOLUNTEER',
-    'form-title': 'Become a Volunteer',
-    'form-subtitle': 'Join our community in service and bring positive change together.',
-    'benefits-title': 'Benefits of Volunteering',
-    'benefit-1': 'Opportunity to serve the community',
-    'benefit-2': 'Networking with new people',
-    'benefit-3': 'Leadership and skill development',
-    'benefit-4': 'Certificates and recognition',
-    'benefit-5': 'Free food and refreshments',
-    'benefit-6': 'Valuable work experience',
-    'personal-info': 'Personal Information',
-    'full-name': 'Full Name',
-    'name-placeholder': 'Enter your full name',
-    'phone-number': 'Mobile Number',
-    'phone-placeholder': '+8801XXXXXXXXX',
-    'email': 'Email Address',
-    'email-placeholder': 'Enter your email address',
-    'age': 'Age',
-    'age-placeholder': 'Enter your age',
-    'address': 'Address',
-    'address-placeholder': 'Enter your full address',
-    'occupation': 'Occupation',
-    'occupation-placeholder': 'Enter your occupation',
-    'availability-title': 'Availability & Skills',
-    'availability-label': 'Select your available days',
-    'day-1': 'First day of Puja',
-    'day-2': 'Second day of Puja',
-    'day-3': 'Third day of Puja',
-    'day-4': 'Fourth day of Puja',
-    'all-days': 'All days',
-    'skills': 'Special Skills',
-    'select-skill': 'Select your skill',
-    'medical-skill': 'Medical Assistance',
-    'crowd-skill': 'Crowd Management',
-    'technical-skill': 'Technical Support',
-    'cooking-skill': 'Cooking & Serving',
-    'decoration-skill': 'Decoration',
-    'security-skill': 'Security',
-    'photography-skill': 'Photography/Videography',
-    'other-skill': 'Other',
-    'time-slot': 'Preferred Time',
-    'select-time': 'Select time',
-    'morning': 'Morning (8:00 - 12:00)',
-    'afternoon': 'Afternoon (12:00 - 16:00)',
-    'evening': 'Evening (16:00 - 20:00)',
-    'night': 'Night (20:00 - 24:00)',
-    'flexible': 'Flexible',
-    'previous-experience': 'Previous Experience',
-    'experience-placeholder': 'Describe your past volunteering experience (if any)',
-    'documents-title': 'Document Upload',
-    'resume-label': 'Upload Resume/CV (optional)',
-    'file-upload-text': 'Choose File',
-    'terms-text': 'I confirm that all the above information is true and I voluntarily agree to work as a volunteer.',
-    'commitment-text': 'I promise to be present at the scheduled time and fulfill my responsibilities.',
-    'data-consent-text': 'I agree that my information will only be used for volunteer activities and not shared with third parties.',
-    'submit-btn': 'Submit'
-  },
-  hi: {
-    'back-text': 'वापस जाएं',
-    'volunteer-badge': 'स्वयंसेवक',
-    'form-title': 'स्वयंसेवक बनें',
-    'form-subtitle': 'हमारे समुदाय की सेवा में जुड़ें और मिलकर सकारात्मक बदलाव लाएं।',
-    'benefits-title': 'स्वयंसेवा के लाभ',
-    'benefit-1': 'समुदाय की सेवा करने का अवसर',
-    'benefit-2': 'नए लोगों से नेटवर्किंग',
-    'benefit-3': 'नेतृत्व और कौशल विकास',
-    'benefit-4': 'प्रमाणपत्र और मान्यता',
-    'benefit-5': 'मुफ्त भोजन और रिफ्रेशमेंट',
-    'benefit-6': 'मूल्यवान कार्य अनुभव',
-    'personal-info': 'व्यक्तिगत जानकारी',
-    'full-name': 'पूरा नाम',
-    'name-placeholder': 'अपना पूरा नाम दर्ज करें',
-    'phone-number': 'मोबाइल नंबर',
-    'phone-placeholder': '+91XXXXXXXXXX',
-    'email': 'ईमेल पता',
-    'email-placeholder': 'अपना ईमेल पता दर्ज करें',
-    'age': 'आयु',
-    'age-placeholder': 'अपनी आयु दर्ज करें',
-    'address': 'पता',
-    'address-placeholder': 'अपना पूरा पता दर्ज करें',
-    'occupation': 'पेशा',
-    'occupation-placeholder': 'अपना पेशा दर्ज करें',
-    'availability-title': 'उपलब्धता और कौशल',
-    'availability-label': 'अपनी उपलब्ध तिथियां चुनें',
-    'day-1': 'पूजा का पहला दिन',
-    'day-2': 'पूजा का दूसरा दिन',
-    'day-3': 'पूजा का तीसरा दिन',
-    'day-4': 'पूजा का चौथा दिन',
-    'all-days': 'सभी दिन',
-    'skills': 'विशेष कौशल',
-    'select-skill': 'अपना कौशल चुनें',
-    'medical-skill': 'चिकित्सा सेवा',
-    'crowd-skill': 'भीड़ नियंत्रण',
-    'technical-skill': 'तकनीकी सहायता',
-    'cooking-skill': 'खाना बनाना और परोसना',
-    'decoration-skill': 'सजावट',
-    'security-skill': 'सुरक्षा',
-    'photography-skill': 'फोटोग्राफी/वीडियोग्राफी',
-    'other-skill': 'अन्य',
-    'time-slot': 'पसंदीदा समय',
-    'select-time': 'समय चुनें',
-    'morning': 'सुबह (8:00 - 12:00)',
-    'afternoon': 'दोपहर (12:00 - 16:00)',
-    'evening': 'शाम (16:00 - 20:00)',
-    'night': 'रात (20:00 - 24:00)',
-    'flexible': 'कभी भी',
-    'previous-experience': 'पिछला अनुभव',
-    'experience-placeholder': 'अपना पिछला स्वयंसेवा अनुभव बताएं (यदि कोई हो)',
-    'documents-title': 'दस्तावेज अपलोड',
-    'resume-label': 'रिज़्यूमे/सीवी अपलोड करें (वैकल्पिक)',
-    'file-upload-text': 'फ़ाइल चुनें',
-    'terms-text': 'मैं पुष्टि करता हूं कि ऊपर दी गई सभी जानकारी सही है और मैं स्वेच्छा से स्वयंसेवक के रूप में कार्य करने के लिए सहमत हूं।',
-    'commitment-text': 'मैं वादा करता हूं कि निर्धारित समय पर उपस्थित रहूंगा और अपनी जिम्मेदारियां पूरी करूंगा।',
-    'data-consent-text': 'मैं सहमत हूं कि मेरी जानकारी केवल स्वयंसेवा गतिविधियों के लिए उपयोग की जाएगी और तीसरे पक्ष के साथ साझा नहीं की जाएगी।',
-    'submit-btn': 'जमा करें'
-  }
-};
-
-// =======================
-// Language switching
-// =======================
-function updateLanguage(lang) {
-  document.documentElement.lang = lang;
-  document.body.classList.remove('english', 'hindi');
-  if (lang === 'en') document.body.classList.add('english');
-  if (lang === 'hi') document.body.classList.add('hindi');
-
-  document.querySelectorAll('[data-key]').forEach(el => {
-    const key = el.getAttribute('data-key');
-    if (translations[lang][key]) {
-      el.textContent = translations[lang][key];
-    }
-  });
-
-  document.querySelectorAll('[data-key-placeholder]').forEach(el => {
-    const key = el.getAttribute('data-key-placeholder');
-    if (translations[lang][key]) {
-      el.placeholder = translations[lang][key];
-    }
-  });
-
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-  });
-
-  localStorage.setItem('preferred-language', lang);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  const savedLang = localStorage.getItem('preferred-language') || 'bn';
-  updateLanguage(savedLang);
-
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', () => updateLanguage(btn.getAttribute('data-lang')));
-  });
-
-  // =======================
-  // Form Submission Handling
-  // =======================
-  const form = document.getElementById('volunteerForm');
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const submitBtn = form.querySelector('button[type="submit"]');
-    submitBtn.disabled = true;
-    const original = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<span class="loading"></span>';
-
-    setTimeout(() => {
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = original;
-      alert('✅ Thank you! Your volunteer registration has been submitted.');
-      form.reset();
-    }, 2000); // simulate async
-  });
-});
-</script>
+        // Initialize with Bengali on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.language-selector-container .lang-btn[data-lang="bn"]').click();
+        });
+    </script>
+</body>
+</html>
