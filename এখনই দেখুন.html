@@ -1,52 +1,291 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>এখনই দেখুন</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body {
-      background: linear-gradient(to right, #fdf2f8, #fce7f3);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>এখনই দেখুন</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #F8FAFC;
+            --header-bg: #E47A24;
+            --text-color: #374151;
+            --card-bg: #FFFFFF;
+            --card-shadow: rgba(0, 0, 0, 0.05);
+            --card-hover-shadow: rgba(0, 0, 0, 0.1);
+            --card-border-color: #E5E7EB;
+            --btn-bg: #E47A24;
+            --btn-hover-bg: #BF2020;
+            --back-btn-bg: #634b5a;
+            --back-btn-hover-bg: #f32020;
+            --lang-active-bg: #951421;
+            --lang-text-color: #6B7280;
+            --transition-speed: 0.3s;
+            /* New color variables for footer */
+            --secondary-color: #dd0937;
+            --text-light: #ffffff;
+            --background-light: #fff;
+        }
+
+        /* --- Updated Layout CSS --- */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color);
+            transition: background-color var(--transition-speed) ease;
+        }
+
+        .main-content-wrapper {
+            flex-grow: 1;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--header-bg);
+            color: #fff;
+            /* Using flexbox for layout */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2.5rem; /* Adjusted padding */
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .back-button:hover {
+            background: linear-gradient(135deg, #ff512f, #dd2476);
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            display: flex;
+            background: #F3F4F6;
+            border-radius: 8px;
+            padding: 4px;
+            border: 1px solid #E5E7EB;
+        }
+        .lang-btn {
+            border: none;
+            background: transparent;
+            color: var(--lang-text-color);
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+        .lang-btn.active {
+            background-color: var(--lang-active-bg);
+            color: #fff;
+            box-shadow: 0 2px 5px rgba(247, 84, 2, 0.981);
+        }
+        .lang-btn:hover:not(.active) {
+            background-color: #E5E7EB;
+        }
+        
+        /* Stylish Cards */
+        .option-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 32px;
+            border: 1px solid var(--card-border-color);
+            box-shadow: 0 4px 12px var(--card-shadow);
+            transition: all var(--transition-speed) ease;
+        }
+        .option-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--card-hover-shadow);
+        }
+        .option-card h2 {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #951421;
+        }
+        .option-card p {
+            font-size: 1rem;
+            color: #6B7280;
+        }
+
+        /* Action Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            background-color: var(--btn-bg);
+            transition: all var(--transition-speed) ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: var(--btn-hover-bg);
+            transform: translateY(-1px);
+        }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            font-size: 1.1em;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        footer a {
+            color: var(--background-light);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            color: var(--text-light);
+        }
+    </style>
 </head>
 <body class="font-sans">
-  <header class="bg-pink-700 text-white text-center py-6 shadow-lg text-3xl font-bold tracking-wide">
-    📍 এখনই দেখুন - লাইভ আপডেট
-  </header>
 
-  <main class="p-10">
-    <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-
-      <!-- Card 1 -->
-      <div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border-t-4 border-pink-700">
-        <div class="p-6">
-          <h2 class="text-pink-700 text-xl font-bold mb-2">🗺️ প্যান্ডেল ম্যাপ</h2>
-          <p class="text-gray-700 mb-4">আপনার নিকটবর্তী প্যান্ডেল কোথায় রয়েছে? একটি ক্লিকেই জেনে নিন।</p>
-          <a href="pandelmap.html" class="inline-block bg-pink-700 hover:bg-pink-800 text-white font-semibold px-4 py-2 rounded-lg transition">ম্যাপ দেখুন</a>
+    <header class="text-white text-center py-6 px-4 shadow-md text-3xl font-bold tracking-wide relative">
+        <a href="index.html" class="back-button">
+            <span>←</span>
+            <span data-key="backBtn">Go Back</span>
+        </a>
+        <span data-key="header">📍 Live Updates - Check Now</span>
+        <div class="language-switcher">
+            <button class="lang-btn active" data-lang="en">English</button>
+            <button class="lang-btn" data-lang="bn">বাংলা</button>
+            <button class="lang-btn" data-lang="hi">हिन्दी</button>
         </div>
-      </div>
+    </header>
 
-      <!-- Card 3 -->
-      <div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border-t-4 border-pink-700">
-        <div class="p-6">
-          <h2 class="text-pink-700 text-xl font-bold mb-2"> রুট নির্দেশিকা</h2>
-          <p class="text-gray-700 mb-4">আপনার গন্তব্য প্যান্ডেলে পৌঁছাতে কোন মেট্রো নেবেন? সহজ রুট জেনে নিন।</p>
-          <a href="root.html" class="inline-block bg-pink-700 hover:bg-pink-800 text-white font-semibold px-4 py-2 rounded-lg transition">রুট প্ল্যান দেখুন</a>
+    <div class="main-content-wrapper">
+        <main class="p-10">
+            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="option-card flex flex-col justify-between">
+                    <div>
+                        <h2 class="mb-2" data-key="card1Title">🗺️ Pandal Map</h2>
+                        <p class="mb-6" data-key="card1Desc">Find nearby pandals instantly with just one click.</p>
+                    </div>
+                    <a href="pandelmap.html" class="btn self-start" data-key="card1Btn">View Map</a>
+                </div>
+
+                <div class="option-card flex flex-col justify-between">
+                    <div>
+                        <h2 class="mb-2" data-key="card2Title">🚇 Route Guide</h2>
+                        <p class="mb-6" data-key="card2Desc">Which metro to take to reach your destination pandal? Find out easily.</p>
+                    </div>
+                    <a href="root.html" class="btn self-start" data-key="card2Btn">View Route Plan</a>
+                </div>
+
+                <div class="option-card flex flex-col justify-between">
+                    <div>
+                        <h2 class="mb-2" data-key="card3Title">🎟️ Pass / Booking Info</h2>
+                        <p class="mb-6" data-key="card3Desc">Details of passes or bookings required for pandal visits.</p>
+                    </div>
+                    <a href="bookingpass.html" class="btn self-start" data-key="card3Btn">Get Booking / Pass</a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <span data-key="footerText">© 2025 PujaSathi | মা আসেন ভক্তির সাগরে, আনন্দে ভরে প্রতিটি অন্তর |</span>
+        <div>
+            <a href="#" data-key="privacy">Privacy Policy</a> |
+            <a href="#" data-key="terms">Terms of Service</a>
         </div>
-      </div>
+    </footer>
+    
+    <script>
+        const translations = {
+            bn: {
+                header: "📍 এখনই দেখুন - লাইভ আপডেট",
+                backBtn: "ফিরে যান",
+                card1Title: "🗺️ প্যান্ডেল ম্যাপ",
+                card1Desc: "আপনার নিকটবর্তী প্যান্ডেল কোথায় রয়েছে? একটি ক্লিকেই জেনে নিন।",
+                card1Btn: "ম্যাপ দেখুন",
+                card2Title: "🚇 রুট নির্দেশিকা",
+                card2Desc: "আপনার গন্তব্য প্যান্ডেলে পৌঁছাতে কোন মেট্রো নেবেন? সহজ রুট জেনে নিন।",
+                card2Btn: "রুট প্ল্যান দেখুন",
+                card3Title: "🎟️ পাস / বুকিং তথ্য",
+                card3Desc: "প্যান্ডেল ভিজিট করার জন্য প্রয়োজনীয় পাস বা বুকিং ডিটেইলস।",
+                card3Btn: "বুকিং বা পাস সংগ্রহ করুন",
+                footerText: "© 2025 PujaSathi | মা আসেন ভক্তির সাগরে, আনন্দে ভরে প্রতিটি অন্তর।"
+            },
+            hi: {
+                header: "📍 अभी देखें - लाइव अपडेट",
+                backBtn: "वापस जाएं",
+                card1Title: "🗺️ पंडाल मैप",
+                card1Desc: "आपके नजदीकी पंडाल कहां है? एक क्लिक में जानें।",
+                card1Btn: "मैप देखें",
+                card2Title: "🚇 रूट निर्देश",
+                card2Desc: "अपने गंतव्य पंडाल तक पहुँचने के लिए कौन सा मेट्रो लें? आसान रूट जानें।",
+                card2Btn: "रूट प्लान देखें",
+                card3Title: "🎟️ पास / बुकिंग जानकारी",
+                card3Desc: "पंडाल विजिट करने के लिए आवश्यक पास या बुकिंग डिटेल्स।",
+                card3Btn: "बुकिंग या पास प्राप्त करें",
+                footerText: "© 2025 PujaSathi | माँ आती है भक्ति के सागर में, हर दिल खुशी से भर जाता है।"
+            },
+            en: {
+                header: "📍 Live Updates - Check Now",
+                backBtn: "Go Back",
+                card1Title: "🗺️ Pandal Map",
+                card1Desc: "Find nearby pandals instantly with just one click.",
+                card1Btn: "View Map",
+                card2Title: "🚇 Route Guide",
+                card2Desc: "Which metro to take to reach your destination pandal? Find out easily.",
+                card2Btn: "View Route Plan",
+                card3Title: "🎟️ Pass / Booking Info",
+                card3Desc: "Details of passes or bookings required for pandal visits.",
+                card3Btn: "Get Booking / Pass",
+                footerText: "© 2025 PujaSathi | Mother arrives in a sea of devotion, filling every heart with joy."
+            }
+        };
 
-      <!-- Card 4 -->
-      <div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border-t-4 border-pink-700">
-        <div class="p-6">
-          <h2 class="text-pink-700 text-xl font-bold mb-2">🎟️ পাস / বুকিং তথ্য</h2>
-          <p class="text-gray-700 mb-4">প্যান্ডেল ভিজিট করার জন্য প্রয়োজনীয় পাস বা বুকিং ডিটেইলস।</p>
-          <a href="bookingpass.html" class="inline-block bg-pink-700 hover:bg-pink-800 text-white font-semibold px-4 py-2 rounded-lg transition">বুকিং বা পাস সংগ্রহ করুন</a>
-        </div>
-      </div>
+        // Language Button Click Event
+        document.querySelectorAll(".lang-btn").forEach(btn => {
+            btn.addEventListener("click", function() {
+                document.querySelectorAll(".lang-btn").forEach(b => b.classList.remove("active"));
+                this.classList.add("active");
+                const lang = this.getAttribute("data-lang");
 
-    </section>
-  </main>
+                document.querySelectorAll("[data-key]").forEach(el => {
+                    const key = el.getAttribute("data-key");
+                    if (translations[lang] && translations[lang][key]) {
+                        el.innerText = translations[lang][key];
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
