@@ -6,11 +6,11 @@
     --text-dark: #333333;
     --text-light: #FFFFFF;
 
-    /* New colors for language switcher from the image */
-    --lang-button-bg-active: #B01E35; /* Darker red for active button */
+    /* Updated colors for language switcher from the image */
+    --lang-button-bg-active: linear-gradient(135deg, #E65A20, #E48A49);
     --lang-button-text-active: #FFFFFF;
-    --lang-button-text-inactive: #606060; /* Darker grey for inactive text */
-    --lang-switcher-bg: #FFFFFF; /* White background for the switcher container */
+    --lang-button-text-inactive: #DDD;
+    --lang-switcher-bg: #78482A; /* Dark brown background for the switcher container */
 }
 
 body {
@@ -44,16 +44,18 @@ header p {
     font-style: italic;
 }
 
-/* Language Switcher Styles */
+/* --- Language Switcher Styles --- */
 .language-switcher {
     position: absolute;
     top: 20px;
     right: 20px;
     display: flex;
+    align-items: center;
     gap: 0;
     background-color: var(--lang-switcher-bg);
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 5px; /* Adjust padding to create space from the container edge */
+    border-radius: 30px; /* More rounded, oval shape */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     z-index: 101;
 }
@@ -72,12 +74,12 @@ header p {
 }
 
 .lang-btn.active {
-    background-color: var(--lang-button-bg-active);
+    background-image: var(--lang-button-bg-active);
     color: var(--lang-button-text-active);
     font-weight: 700;
-    border-radius: 10px;
+    border-radius: 30px; /* Pill shape for the active button */
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    margin: 4px; /* Adjust margin to create space from the container edge */
+    white-space: nowrap; /* Prevents text from wrapping */
 }
 
 /* Ensure other buttons have no rounded corners or background */
