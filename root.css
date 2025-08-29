@@ -38,33 +38,6 @@ body{
   grid-template-columns: 1fr;
   gap: 20px;
 }
-.back-container {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-}
-.back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #ff7e5f, #feb47b); /* সুন্দর গ্রেডিয়েন্ট */
-            color: #fff;
-            padding: 12px 28px;
-            border-radius: 50px; /* পিল শেপ */
-            font-weight: 600;
-            font-size: 16px;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-        
-        .back-button:hover {
-            background: linear-gradient(135deg, #ff512f, #dd2476); /* hover এ অন্য গ্রেডিয়েন্ট */
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 6px 14px rgba(0,0,0,0.25);
-        }
 
 .site-header{
   width:min(1080px, 92vw);
@@ -88,6 +61,35 @@ body{
   color:var(--pineapple);
   font-weight:800;
 }
+
+/* ------------------ Back Button ------------------ */
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #f97316, #BF2020); /* orange to peach gradient */
+  color: #fff;
+  text-decoration: none;
+  border-radius: 999px; /* pill shape */
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.back-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+.back-button span:first-child {
+  font-size: 18px;
+  line-height: 1;
+}
+
 
 /* ------------------ Lang Switch (pill) ------------------ */
 .lang-switch{
@@ -255,11 +257,9 @@ body{
 .map-frame iframe{ width:100%; height:360px; border:0; }
 
 /* ------------------ Footer ------------------ */
-.site-footer {
-    width: min(1080px, 92vw);
-    margin: 8px auto 32px; 
-    color: var(--muted); 
-    text-align: center;
+.site-footer{
+  width:min(1080px, 92vw);
+  margin: 8px auto 32px; color:var(--muted); text-align:center;
 }
 
 /* ------------------ Responsive ------------------ */
