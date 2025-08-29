@@ -10,25 +10,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #F8FAFC;
-            --header-bg: #E47A24;
-            --text-color: #374151;
-            --card-bg: #FFFFFF;
-            --card-shadow: rgba(0, 0, 0, 0.05);
-            --card-hover-shadow: rgba(0, 0, 0, 0.1);
-            --card-border-color: #E5E7EB;
-            --btn-bg: #E47A24;
-            --btn-hover-bg: #BF2020;
-            --back-btn-bg: #634b5a;
-            --back-btn-hover-bg: #f32020;
-            --lang-active-bg: #951421;
-            --lang-text-color: #6B7280;
-            --transition-speed: 0.3s;
-            /* New color variables for footer */
-            --secondary-color: #dd0937;
-            --text-light: #ffffff;
-            --background-light: #fff;
-        }
+    --bg-color: #F8FAFC;
+    --header-bg: #E47A24;
+    --text-color: #374151;
+    --card-bg: #FFFFFF;
+    --card-shadow: rgba(0, 0, 0, 0.05);
+    --card-hover-shadow: rgba(0, 0, 0, 0.1);
+    --card-border-color: #E5E7EB;
+    --btn-bg: #E47A24;
+    --btn-hover-bg: #BF2020;
+    --back-btn-bg: #634b5a;
+    --back-btn-hover-bg: #f32020;
+    --lang-active-bg: linear-gradient(135deg, #E65A20, #E48A49); /* Gradient for active button */
+    --lang-text-color: #DDD; /* Lighter text for inactive buttons */
+    --lang-switcher-bg: #78482A; /* Dark brown background for the container */
+    --transition-speed: 0.3s;
+    /* New color variables for footer */
+    --secondary-color: #dd0937;
+    --text-light: #ffffff;
+    --background-light: #fff;
+}
 
         /* --- Updated Layout CSS --- */
         body {
@@ -82,31 +83,36 @@
 
         /* Language Switcher */
         .language-switcher {
-            display: flex;
-            background: #F3F4F6;
-            border-radius: 8px;
-            padding: 4px;
-            border: 1px solid #E5E7EB;
-        }
+    display: flex;
+    align-items: center;
+    background: var(--lang-switcher-bg); /* Use the new dark brown variable */
+    border-radius: 30px; /* Large border-radius for oval shape */
+    padding: 5px; /* Adds space around the buttons */
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
+}
+
         .lang-btn {
-            border: none;
-            background: transparent;
-            color: var(--lang-text-color);
-            font-size: 0.95rem;
-            font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all var(--transition-speed) ease;
-        }
+    border: none;
+    background: transparent;
+    color: var(--lang-text-color);
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 10px 20px; /* Adjusted padding for a more oval shape */
+    border-radius: 30px; /* Large border-radius for inactive buttons */
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    white-space: nowrap;
+}
         .lang-btn.active {
-            background-color: var(--lang-active-bg);
-            color: #fff;
-            box-shadow: 0 2px 5px rgba(247, 84, 2, 0.981);
-        }
+    background: var(--lang-active-bg); /* Use the gradient variable */
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(247, 84, 2, 0.981); /* A subtle shadow on the active button */
+}
         .lang-btn:hover:not(.active) {
-            background-color: #E5E7EB;
-        }
+    background-color: transparent;
+    color: var(--lang-text-color);
+}
         
         /* Stylish Cards */
         .option-card {
