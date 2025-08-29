@@ -1,114 +1,70 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PujaSathi – পুজোর পথে, আপনার সাথী!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&family=Inter:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PujaSathi – পুজোর পথে, আপনার সাথী!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&family=Inter:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="language-switcher">
-        <button class="lang-btn active" data-lang="bn">বাং</button>
-        <button class="lang-btn" data-lang="en">ENG</button>
-        <button class="lang-btn" data-lang="hi">हिं</button>
+  <div class="language-switcher">
+    <button class="lang-btn active" data-lang="bn">বাং</button>
+    <button class="lang-btn" data-lang="en">ENG</button>
+    <button class="lang-btn" data-lang="hi">हिं</button>
+  </div>
+
+  <header class="fade-in">
+    <h1 data-key="title">উৎসববন্ধু</h1>
+    <p data-key="subtitle">পুজোর পথে, আপনার বন্ধু!</p>
+  </header>
+
+  <nav class="fade-in">
+    <a href="#" data-key="nav-home">হোম</a>
+    <a href="#" data-key="nav-guide">পুজো ট্যুর গাইড</a>
+    <a href="#" data-key="nav-contact">যোগাযোগ</a>
+  </nav>
+
+  <section class="hero fade-in">
+    <div class="hero-content">
+      <h2 data-key="hero-title">দুর্গাপুজো হোক নিরাপদ, সহজ ও স্মরণীয়!</h2>
+      <p data-key="hero-description">লাইভ ভিড় আপডেট, নিরাপদ পথ, পরিবেশ-বান্ধব প্যান্ডেল এবং আরও অনেক কিছু – সব এক প্ল্যাটফর্মে।</p>
+      <a class="cta-button" href="#" data-key="cta-explore">এখনই দেখুন</a>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="feature-box fade-in">
+      <h3><span>🆘</span><span data-key="emergency-title">জরুরী সহায়তা</span></h3>
+      <p data-key="emergency-desc">কাছাকাছি হাসপাতাল এবং থানা সহ এক-ট্যাপ সাহায্য।</p>
+      <a class="cta-button" href="emergency.html" data-key="cta-view">দেখুন</a>
     </div>
 
-    <header class="fade-in">
-        <h1 data-key="title">উৎসববন্ধু</h1>
-        <p data-key="subtitle">পুজোর পথে, আপনার বন্ধু!</p>
-    </header>
-
-    <nav class="fade-in">
-        <a href="#" data-key="nav-home">হোম</a>
-        <a href="#" data-key="nav-guide">পুজো ট্যুর গাইড</a>
-        <a href="#" data-key="nav-contact">যোগাযোগ</a>
-    </nav>
-
-    <section class="hero fade-in">
-        <div class="hero-content">
-            <h2 data-key="hero-title">দুর্গাপুজো হোক নিরাপদ, সহজ ও স্মরণীয়!</h2>
-            <p data-key="hero-description">লাইভ ভিড় আপডেট, নিরাপদ পথ, পরিবেশ-বান্ধব প্যান্ডেল এবং আরও অনেক কিছু – সব এক প্ল্যাটফর্মে।</p>
-            <a class="cta-button" href="এখনই দেখুন.html" data-key="cta-explore">এখনই দেখুন</a>
-        </div>
-    </section>
-
-    <section class="features">
-        <div class="feature-box fade-in">
-            <h3><span>🆘</span><span data-key="emergency-title">জরুরী সহায়তা</span></h3>
-            <p data-key="emergency-desc">কাছাকাছি হাসপাতাল এবং থানা সহ এক-ট্যাপ সাহায্য।</p>
-            <a class="cta-button" href="emergency.html" data-key="cta-view">দেখুন</a>
-        </div>
-
-        <div class="feature-box fade-in">
-            <h3><span>🗺️</span><span data-key="guide-title">পুজো ট্যুর গাইড</span><span>🪔</span></h3>
-            <p data-key="guide-desc">আপনার পুজো ভ্রমণকে আরও রঙিন ও স্মরণীয় করে তুলুন – সেরা প্যান্ডেল ও উৎসবের পথে আপনাকে নিয়ে যাবে আমাদের গাইড!</p>
-            <a class="cta-button" href="guide.html" data-key="cta-view">দেখুন</a>
-        </div>
-
-        <div class="feature-box fade-in">
-            <h3><span>👥</span><span data-key="volunteer-title">স্বেচ্ছাসেবক হোন</span></h3>
-            <p data-key="volunteer-desc">পূজার দিনগুলিতে সাহায্য করার জন্য স্বেচ্ছাসেবক হিসাবে যোগ দিন।</p>
-            <a class="cta-button" href="emergency1.html" data-key="cta-view">দেখুন</a>
-        </div>
-
-        <div class="feature-box fade-in">
-            <h3><span>🔍</span><span data-key="contact-title">যোগাযোগ</span></h3>
-            <p data-key="contact-desc">সহজে হারানো জিনিস বা নিখোঁজ ব্যক্তিদের রিপোর্ট করুন বা খুঁজে বের করুন।</p>
-            <a class="cta-button" href="contact.html" data-key="cta-view">দেখুন</a>
-        </div>
-    </section>
-
-    <footer class="fade-in">
-        <span data-key="footer-text">© 2025 PujaSathi | মা আসেন ভক্তির সাগরে, আনন্দে ভরে প্রতিটি অন্তর |</span>
-        <a href="#" data-key="privacy">Privacy Policy</a> |
-        <a href="#" data-key="terms">Terms of Service</a>
-    </footer>
-
-    <div id="translations" style="display: none;">
-        <span data-key="title" data-lang="en">Utsavbandhu</span>
-        <span data-key="subtitle" data-lang="en">Your companion on the path of Puja!</span>
-        <span data-key="nav-home" data-lang="en">Home</span>
-        <span data-key="nav-guide" data-lang="en">Puja Tour Guide</span>
-        <span data-key="nav-contact" data-lang="en">Contact</span>
-        <span data-key="hero-title" data-lang="en">Let's make Durga Puja safe, easy, and memorable!</span>
-        <span data-key="hero-description" data-lang="en">Live crowd updates, safe routes, eco-friendly pandals, and more—all on one platform.</span>
-        <span data-key="cta-explore" data-lang="en">Explore Now</span>
-        <span data-key="emergency-title" data-lang="en">Emergency Help</span>
-        <span data-key="emergency-desc" data-lang="en">One-tap assistance including nearby hospitals and police stations.</span>
-        <span data-key="guide-title" data-lang="en">Puja Tour Guide</span>
-        <span data-key="guide-desc" data-lang="en">Make your Puja journey more colorful and memorable—our guide will take you to the best pandals and festival routes!</span>
-        <span data-key="volunteer-title" data-lang="en">Be a Volunteer</span>
-        <span data-key="volunteer-desc" data-lang="en">Join as a volunteer to help out during the Puja days.</span>
-        <span data-key="contact-title" data-lang="en">Contact</span>
-        <span data-key="contact-desc" data-lang="en">Easily report or find lost items or missing persons.</span>
-        <span data-key="cta-view" data-lang="en">View</span>
-        <span data-key="footer-text" data-lang="en">© 2025 PujaSathi | Maa comes in a sea of devotion, filling every heart with joy |</span>
-        <span data-key="privacy" data-lang="en">Privacy Policy</span>
-        <span data-key="terms" data-lang="en">Terms of Service</span>
-
-        <span data-key="title" data-lang="hi">उत्सवबंधु</span>
-        <span data-key="subtitle" data-lang="hi">पूजा के रास्ते पर, आपका साथी!</span>
-        <span data-key="nav-home" data-lang="hi">होम</span>
-        <span data-key="nav-guide" data-lang="hi">पूजा टूर गाइड</span>
-        <span data-key="nav-contact" data-lang="hi">संपर्क करें</span>
-        <span data-key="hero-title" data-lang="hi">दुर्गा पूजा को सुरक्षित, आसान और यादगार बनाएं!</span>
-        <span data-key="hero-description" data-lang="hi">लाइव भीड़ अपडेट, सुरक्षित रास्ते, पर्यावरण-अनुकूल पंडाल, और बहुत कुछ – सब एक ही प्लेटफॉर्म पर।</span>
-        <span data-key="cta-explore" data-lang="hi">अभी देखें</span>
-        <span data-key="emergency-title" data-lang="hi">आपातकालीन सहायता</span>
-        <span data-key="emergency-desc" data-lang="hi">आस-पास के अस्पतालों और पुलिस स्टेशनों सहित एक-टैप सहायता।</span>
-        <span data-key="guide-title" data-lang="hi">पूजा टूर गाइड</span>
-        <span data-key="guide-desc" data-lang="hi">अपनी पूजा यात्रा को और भी रंगीन और यादगार बनाएं – हमारा गाइड आपको सर्वश्रेष्ठ पंडालों और त्योहार के रास्तों पर ले जाएगा!</span>
-        <span data-key="volunteer-title" data-lang="hi">स्वयंसेवक बनें</span>
-        <span data-key="volunteer-desc" data-lang="hi">पूजा के दिनों में मदद करने के लिए एक स्वयंसेवक के रूप में शामिल हों।</span>
-        <span data-key="contact-title" data-lang="hi">संपर्क करें</span>
-        <span data-key="contact-desc" data-lang="hi">आसानी से खोई हुई वस्तुओं या लापता व्यक्तियों की रिपोर्ट करें या ढूंढें।</span>
-        <span data-key="cta-view" data-lang="hi">देखें</span>
-        <span data-key="footer-text" data-lang="hi">© 2025 PujaSathi | माँ भक्ति के सागर में आती हैं, हर दिल को आनंद से भर देती हैं |</span>
-        <span data-key="privacy" data-lang="hi">गोपनीयता नीति</span>
-        <span data-key="terms" data-lang="hi">सेवा की शर्तें</span>
+    <div class="feature-box fade-in">
+      <h3><span>🗺</span><span data-key="guide-title">পুজো ট্যুর গাইড</span><span>🪔</span></h3>
+      <p data-key="guide-desc">আপনার পুজো ভ্রমণকে আরও রঙিন ও স্মরণীয় করে তুলুন – সেরা প্যান্ডেল ও উৎসবের পথে আপনাকে নিয়ে যাবে আমাদের গাইড!</p>
+      <a class="cta-button" href="guide.html" data-key="cta-view">দেখুন</a>
     </div>
 
-    <script src="script.js"></script>
+    <div class="feature-box fade-in">
+      <h3><span>👥</span><span data-key="volunteer-title">স্বেচ্ছাসেবক হোন</span></h3>
+      <p data-key="volunteer-desc">পূজার দিনগুলিতে সাহায্য করার জন্য স্বেচ্ছাসেবক হিসাবে যোগ দিন।</p>
+      <a class="cta-button" href="emergency1.html" data-key="cta-view">দেখুন</a>
+    </div>
+
+    <div class="feature-box fade-in">
+      <h3><span>🔍</span><span data-key="contact-title">যোগাযোগ</span></h3>
+      <p data-key="contact-desc">সহজে হারানো জিনিস বা নিখোঁজ ব্যক্তিদের রিপোর্ট করুন বা খুঁজে বের করুন।</p>
+      <a class="cta-button" href="contact.html" data-key="cta-view">দেখুন</a>
+    </div>
+  </section>
+
+  <footer class="fade-in">
+    <span data-key="footer-text">© 2025 PujaSathi | মা আসেন ভক্তির সাগরে, আনন্দে ভরে প্রতিটি অন্তর |</span>
+    <a href="#" data-key="privacy">Privacy Policy</a> |
+    <a href="#" data-key="terms">Terms of Service</a>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
