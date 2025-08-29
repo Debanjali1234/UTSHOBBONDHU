@@ -9,56 +9,104 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      font-family: 'Noto Sans Bengali', 'Inter', sans-serif;
-      background: #fff8f0 url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><path d="M50 0L100 50L50 100L0 50Z" fill="%23fcf1e6" fill-opacity="0.5"/></svg>') repeat;
+        font-family: 'Noto Sans Bengali', 'Inter', sans-serif;
+        background: #fff8f0 url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><path d="M50 0L100 50L50 100L0 50Z" fill="%23fcf1e6" fill-opacity="0.5"/></svg>') repeat;
     }
+
     .glass {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
     }
+
     .hover-glow:hover {
-      box-shadow: 0 0 15px rgba(231, 76, 60, 0.5);
+        box-shadow: 0 0 15px rgba(231, 76, 60, 0.5);
     }
-    /* Language buttons */
+
+    /* --- Language Switcher (Modern Rounded Style) --- */
+    .language-switcher {
+        display: flex;
+        gap: 5px;
+        background: #F3F4F6;
+        backdrop-filter: blur(10px);
+        padding: 8px;
+        border-radius: 25px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        border: 1px solid #E5E7EB;
+    }
+
     .lang-btn {
-      background: #f5f5f5;
-      color: #444;
-      padding: 6px 16px;
-      border-radius: 8px;
-      font-weight: 600;
-      transition: all 0.3s ease;
+        background: transparent;
+        color: #6B7280; 
+        padding: 8px 15px;
+        border: none;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        font-family: 'Noto Sans Bengali', 'Inter', sans-serif;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        white-space: nowrap;
+        position: relative;
+        overflow: hidden;
     }
+
+    .lang-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(229, 231, 235, 0.3), transparent);
+        transition: left 0.5s;
+    }
+
+    .lang-btn:hover::before {
+        left: 100%;
+    }
+
     .lang-btn.active {
-      background: #8b0c0c;
-      color: white;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        background: #951421; 
+        color: white;
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(149, 20, 33, 0.4);
     }
+
     .lang-btn:hover:not(.active) {
-      background: #e5e5e5;
+        background-color: #E5E7EB;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
+
+    .lang-btn.active:hover {
+        background: #951421;
+        transform: scale(1.05) translateY(-2px);
+        box-shadow: 0 8px 20px rgba(149, 20, 33, 0.5);
+    }
+
     .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #ff7e5f, #feb47b);
-            color: #fff;
-            padding: 12px 28px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 16px;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-        
-        .back-button:hover {
-            background: linear-gradient(135deg, #ff512f, #dd2476);
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 6px 14px rgba(0,0,0,0.25);
-        }
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #ff7e5f, #feb47b);
+        color: #fff;
+        padding: 12px 28px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 16px;
+        letter-spacing: 0.5px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .back-button:hover {
+        background: linear-gradient(135deg, #ff512f, #dd2476);
+        transform: translateY(-3px) scale(1.03);
+        box-shadow: 6px 14px rgba(0,0,0,0.25);
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -69,7 +117,8 @@
       <span data-key="backBtn">Go Back</span>
     </a>
     
-    <div class="flex gap-2 bg-white px-3 py-1 rounded-lg">
+    <!-- Language Switcher -->
+    <div class="language-switcher">
       <button class="lang-btn" data-lang="en">English</button>
       <button class="lang-btn" data-lang="bn">বাংলা</button>
       <button class="lang-btn" data-lang="hi">हिन्दी</button>
@@ -120,7 +169,7 @@
   </main>
 
   <footer id="footerText" class="bg-red-800 text-white text-center py-4 mt-10">
-    © 2025 PujaSathi | ❤️ সহ কোলকাতায় ডিজাইন করা হয়েছে
+    © 2025 PujaSathi | ❤ সহ কোলকাতায় ডিজাইন করা হয়েছে
   </footer>
 
   <script>
@@ -143,7 +192,7 @@
         rule2: "প্যান্ডেলের প্রবেশদ্বারে QR কোড স্ক্যান করুন।",
         rule3: "একটি পাস শুধুমাত্র একবার ব্যবহার করা যাবে।",
         rule4: "প্রবেশের সময় আপনার আইডি কার্ড সঙ্গে রাখুন।",
-        footerText: "© 2025 PujaSathi | ❤️ সহ কোলকাতায় ডিজাইন করা হয়েছে"
+        footerText: "© 2025 PujaSathi | ❤ সহ কোলকাতায় ডিজাইন করা হয়েছে"
       },
       hi: {
         backBtn: "वापस जाएं",
@@ -163,7 +212,7 @@
         rule2: "पंडाल प्रवेश द्वार पर QR कोड स्कैन करें।",
         rule3: "एक पास केवल एक बार इस्तेमाल किया जा सकता है।",
         rule4: "प्रवेश के समय अपना पहचान पत्र साथ रखें।",
-        footerText: "© 2025 PujaSathi | ❤️ से कोलकाता में डिज़ाइन किया गया"
+        footerText: "© 2025 PujaSathi | ❤ से कोलकाता में डिज़ाइन किया गया"
       },
       en: {
         backBtn: "Go Back",
@@ -183,7 +232,7 @@
         rule2: "Scan the QR code at the pandal entrance.",
         rule3: "One pass can only be used once.",
         rule4: "Carry your ID card while entering.",
-        footerText: "© 2025 PujaSathi | ❤️ Designed in Kolkata"
+        footerText: "© 2025 PujaSathi | ❤ Designed in Kolkata"
       }
     };
 
@@ -193,7 +242,6 @@
       const t = translations[lang];
 
       document.querySelector('[data-key="backBtn"]').innerText = t.backBtn;
-
       document.getElementById("mainHeading").innerText = t.mainHeading;
       document.getElementById("mainPara").innerText = t.mainPara;
       document.getElementById("card1Title").innerText = t.card1Title;
@@ -216,6 +264,7 @@
       document.querySelector(`.lang-btn[data-lang="${lang}"]`).classList.add("active");
     }
 
+    // Default language: Bengali
     setLanguage("bn");
 
     buttons.forEach(btn => {
